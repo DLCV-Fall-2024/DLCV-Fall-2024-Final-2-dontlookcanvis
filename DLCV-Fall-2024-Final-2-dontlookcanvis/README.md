@@ -1,89 +1,171 @@
-# DLCV Final Project ( Multiple Concept Personalization )
+<div align="center">
 
-## Checkpoints download
-Please download all the checkpoints from: https://drive.google.com/drive/folders/1u2un5sqWEY7yj-U-1wgyN41BICqQ3wWm?usp=sharing
+<h1>Concept Conductor</h1>
+<h3>Concept Conductor: Orchestrating Multiple Personalized Concepts in Text-to-Image Synthesis</h3>
 
-## Usage
+Zebin Yao, &nbsp; Fangxiang Feng, &nbsp; Ruifan Li, &nbsp; Xiaojie Wang
 
-    git clone https://github.com/DLCV-Fall-2024/DLCV-Fall-2024-Final-2-dontlookcanvis.git
-    cd Concept-Conductor
-    pip install -r requirements.txt
+Beijing University of Posts and Telecommunications
 
-### General Training and Inference
-```shell script=
-bash train.sh <path/to/config>
-bash inference.sh <path/to/config>
-```
-```<path/to/config>``` example: ```configs/train/stable-diffusion-v1-5/cat2.yml```
+[![Project Website](https://img.shields.io/badge/Project-Website-orange)](https://nihukat.github.io/Concept-Conductor/)
+[![arXiv](https://img.shields.io/badge/arXiv-<2408.03632>-<COLOR>.svg)](https://arxiv.org/abs/2408.03632)
 
-### Peer review
-0. python scripts/... --xxx
+</div>
 
-1.
+<img src="assets/teaser.png" width=100%>
 
-2.
+## 🔍 Results
 
-3.
+### Combination of 2 Concepts:
 
-### CodaLab uploads
-0.
+<img src="assets/results_of_2_concepts.png" width=100%>
 
-1.
+### Combination of More Than 2 Concepts:
 
-2.
-
-3.
+<img src="assets/more_than_2_concepts.png" width=100%>
 
 
-### Poster results
+## 🛠️ Installation
 
-#### Attention Clustering Post-processing
-
-
-#### Mix of Show
-For reproduction of mix-of-show results, please clone this repository with ```--recursive``` to download the Mix-of-Show submodule.
-Please follow the environment setup in Mix of Show repository.
-```
-    cd Mix-of-Show
-    python setup.py install
-    
-    # Clone diffusers==0.14.0 with T2I-Adapter support
-    git clone https://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p@github.com/guyuchao/diffusers-t2i-adapter.git
-
-    # switch to T2IAdapter-for-mixofshow
-    %cd diffusers-t2i-adapter
-    git switch T2IAdapter-for-mixofshow
-
-    # install from source
-    pip install .
-```
-... etc.
-
-To download checkpoints, execute:
-```
-    cd experiments/pretrained_models
-    gdown 16P7v_WQ46csK_KfXhmkt1iO9ulpkUjq8
-    unzip composed_edlora.zip
-    rm composed_edlora.zip
-```
-Please also download the stable-diffusion v1.4 model, and create soft link:
-```
-    ln -s <path/to/sd-v1-4> experiments/pretrained_models/stable-diffusion-v1-4
+```bash
+git clone https://github.com/Nihukat/Concept-Conductor.git
+cd Concept-Conductor
+pip install -r requirements.txt
 ```
 
-For inference, here we take the prompt-0 for example:
+## 📝 Preparation
+
+### 1. Download Pretrained Text-to-Image Models.
+
+We implemented our method on both Stable Diffusion 1.5 and SDXL 1.0 respectively. 
+
+For Stable Diffusion 1.5, we adopt [ChilloutMix](https://civitai.com/models/6424/chilloutmix) for real-world concepts and [Anything-v4](https://huggingface.co/xyn-ai/anything-v4.0) for anime concepts.
+
+```bash
+cd experiments/pretrained_models
+
+# Diffusers-version ChilloutMix
+git-lfs clone https://huggingface.co/windwhinny/chilloutmix.git
+
+# Diffusers-version Anything-v4
+git-lfs clone https://huggingface.co/xyn-ai/anything-v4.0.git
 ```
-combined_model_root="experiments/composed_edlora/stable-diffusion-v1-4/"
-expdir="cat2+dog6"
 
-context_prompt="A <cat2> on the right and a <dog6> on the left."
-python Mix-of-Show/inference/mix_of_show_sample.py \
-  --pretrained_model="experiments/pretrained_models/stable-diffusion-v1-4" \
-  --combined_model="${combined_model_root}/${expdir}/combined_model_.pth" \
-  --save_dir="results/multi-concept/${expdir}" \
-  --pipeline_type="sd_pplus" \
-  --prompt="${context_prompt}" \
-  --suffix="" \
-  --n_samples=<n_sample_you_want>
+For SDXL 1.0, we adopt [RealVisXL V5.0](https://civitai.com/models/139562?modelVersionId=789646) for real-world concepts and [Anything-XL](https://civitai.com/models/9409/or-anything-xl) for anime concepts.
 
+```bash
+cd experiments/pretrained_models
+
+# Diffusers-version RealVisXL V5.0
+git-lfs clone https://huggingface.co/SG161222/RealVisXL_V5.0.git
+
+# Diffusers-version Anything-XL
+git-lfs clone https://huggingface.co/eienmojiki/Anything-XL.git
+```
+
+### 2. (Optional) Train ED-LoRAs.
+
+We adopt ED-LoRAs (proposed in [Mix-of-Show](https://github.com/TencentARC/Mix-of-Show)) as single-concept customization models.
+If you want to train ED-LoRAs yourself, you can download the training data we used in our paper on [Google Drive](https://drive.google.com/drive/folders/1roYyOL7e5Ivx3lvLAXz8XKY00sDLC377?usp=drive_link).
+
+You can also construct personalized concept datasets with your own custom images and corresponding text captions, referring to the structure of our dataset directory.
+
+We provide training scripts for both Stable Diffusion 1.5 and SDXL 1.0. 
+
+**For Stable Diffusion 1.5 :**
+
+```bash
+# Train ED-LoRAs for real-world concepts
+python train_edlora.py -opt configs/edlora/train/chow_dog.yml
+
+# Train ED-LoRAs for anime concepts
+python train_edlora.py -opt configs/edlora/train/mitsuha_girl.yml
+```
+
+**For SDXL 1.0 :**
+
+```bash
+# Train ED-LoRAs for real-world concepts
+python train_edlora_sdxl.py -opt configs/edlora/train_sdxl/chow_dog.yml
+
+# Train ED-LoRAs for anime concepts
+python train_edlora_sdxl.py -opt configs/edlora/train_sdxl/mitsuha_girl.yml
+```
+
+### 3. (Optional) Download our trained ED-LoRAs. 
+
+To quickly reimplement our method, you can download our trained ED-LoRAs from [Google Drive](https://drive.google.com/drive/folders/1roYyOL7e5Ivx3lvLAXz8XKY00sDLC377?usp=drive_link).
+
+## 🚀 Usage
+
+### Generate multiple personalized concepts in an image
+
+**For Stable Diffusion 1.5 :**
+
+```bash
+python sample.py \
+--ref_prompt "A dog and a cat in the street." \
+--base_prompt "A dog and a cat on the beach." \
+--custom_prompts "A <chow_dog_1> <chow_dog_2> on the beach." "A <siberian_cat_1> <siberian_cat_2> on the beach."\
+--ref_image_path "examples/a dog and a cat in the street.png" \
+--ref_mask_paths "examples/a dog and a cat in the street_mask1.png" "examples/a dog and a cat in the street_mask2.png" \
+--edlora_paths "experiments/ED-LoRAs/real/chow_dog.pth" "experiments/ED-LoRAs/real/siberian_cat.pth" \
+--start_seed 0 \
+--batch_size 4 \
+--n_batches 1
+
+```
+
+<img src="assets/A dog and a cat on the beach._seed0-3.png" width=100%>
+
+You can also pass parameters using a configuration file (like ./configs/sample_config.yaml) :
+
+```bash
+python sample.py --config_file "path/to/your/config.yaml"
+```
+
+**For SDXL 1.0 :**
+
+```bash
+python sample_sdxl.py \
+--ref_prompt "A cat on a stool and a dog on the floor." \
+--base_prompt "A cat on a stool and a dog on the floor." \
+--custom_prompts "A <siberian_cat_1> <siberian_cat_2> on a stool and a <siberian_cat_1> <siberian_cat_2> on the floor." "A <chow_dog_1> <chow_dog_2> on a stool and a <chow_dog_1> <chow_dog_2> on the floor." \
+--ref_image_path "examples/a cat on a stool and a dog on the floor.png" \
+--ref_mask_paths "examples/a cat on a stool and a dog on the floor_mask1.png" "examples/a cat on a stool and a dog on the floor_mask2.png" \
+--edlora_paths "experiments/SDXL_ED-LoRAs/real/siberian_cat.pth" "experiments/SDXL_ED-LoRAs/real/chow_dog.pth" \
+--start_seed 0 \
+--batch_size 1 \
+--n_batches 4
+
+```
+
+<img src="assets/A cat on a stool and a dog on the floor._seed0-3.png" width=100%>
+
+You can also pass parameters using a configuration file (like ./configs/sample_config_sdxl.yaml) :
+
+```bash
+python sample_sdxl.py --config_file "path/to/your/config.yaml"
+```
+
+## ✅ To-Do List
+
+- [ ] Create a gradio demo.
+- [ ] Add more usage and applications.
+- [x] Add support for SDXL.
+- [x] Release the training data and trained models.
+- [x] Release the source code.
+
+
+## 📚 Citation
+
+If you find this code useful for your research, please consider citing:
+
+```
+@article{yao2024concept,
+  title={Concept Conductor: Orchestrating Multiple Personalized Concepts in Text-to-Image Synthesis},
+  author={Yao, Zebin and Feng, Fangxiang and Li, Ruifan and Wang, Xiaojie},
+  journal={arXiv preprint arXiv:2408.03632},
+  year={2024}
+}
 ```
