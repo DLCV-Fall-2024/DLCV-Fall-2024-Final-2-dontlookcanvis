@@ -17,6 +17,11 @@ Note that you should replace `<team_name>` with your own team name.
 
 For more details, please click [this link](https://docs.google.com/presentation/d/1eeXx_dL0OgkDn9_lhXnimTHrE6OYvAiiVOBwo2CTVOQ/edit?usp=sharing) to view the slides of Final Project - Multiple Concept Personalization. **The introduction video for final project can be accessed in the slides.**
 
+## Checkpoints download
+ED-LoRAs are already pushed into this repository. For replication of our results on fused models, see the below links.
+### Mix of Show
+Composed ED-LoRAs: https://drive.google.com/drive/folders/1hsmbVbIrMK4EtPFHwlGLz1jd17ajbukv?usp=sharing
+
 # Submission Rules
 ### Deadline
 113/12/26 (Thur.) 23:59 (GMT+8)
