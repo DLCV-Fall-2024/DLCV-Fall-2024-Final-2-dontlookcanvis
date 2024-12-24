@@ -11,7 +11,7 @@ bash inference.sh <Path to gt image folder> <Path to annot file> <Path to output
 # Usage
 To start working on this final project, you should clone this repository into your local machine by the following command:
 
-    git clone https://github.com/DLCV-Fall-2024/DLCV-Fall-2024-Final-2-<team name>.git
+    git clone https://github.com/DLCV-Fall-2024/DLCV-Fall-2024-Final-2-dontlookcanvis.git
   
 Note that you should replace `<team_name>` with your own team name.
 
