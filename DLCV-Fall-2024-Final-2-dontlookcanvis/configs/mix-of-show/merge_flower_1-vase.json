@@ -1,0 +1,14 @@
+[
+    {
+        "lora_path": "experiments/flower_1/models/net_g_1000.pth",
+        "unet_alpha": 1.0,
+        "text_encoder_alpha": 1.0,
+        "concept_name": "<flower_1_1> <flower_1_2>"
+    },
+    {
+        "lora_path": "experiments/vase/models/net_g_1000.pth",
+        "unet_alpha": 1.0,
+        "text_encoder_alpha": 1.0,
+        "concept_name": "<vase_1> <vase_2>"
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "lora_path": "experiments/dog/models/net_g_1000.pth",
+        "unet_alpha": 1.0,
+        "text_encoder_alpha": 1.0,
+        "concept_name": "<dog_1> <dog_2>"
+    },
+    {
+        "lora_path": "experiments/pet_cat1/models/net_g_1000.pth",
+        "unet_alpha": 1.0,
+        "text_encoder_alpha": 1.0,
+        "concept_name": "<pet_cat1_1> <pet_cat1_2>"
+    },
+    {
+        "lora_path": "experiments/dog6/models/net_g_1000.pth",
+        "unet_alpha": 1.0,
+        "text_encoder_alpha": 1.0,
+        "concept_name": "<dog6_1> <dog6_2>"
+    }
+]

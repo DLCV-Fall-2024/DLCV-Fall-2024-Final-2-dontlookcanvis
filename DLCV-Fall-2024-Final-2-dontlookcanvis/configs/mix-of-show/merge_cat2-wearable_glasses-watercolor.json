@@ -1,0 +1,20 @@
+[
+    {
+        "lora_path": "experiments/cat2/models/net_g_1000.pth",
+        "unet_alpha": 1.0,
+        "text_encoder_alpha": 1.0,
+        "concept_name": "<cat2_1> <cat2_2>"
+    },
+    {
+        "lora_path": "experiments/wearable_glasses/models/net_g_1000.pth",
+        "unet_alpha": 1.0,
+        "text_encoder_alpha": 1.0,
+        "concept_name": "<wearable_glasses_1> <wearable_glasses_2>"
+    },
+    {
+        "lora_path": "experiments/watercolor/models/net_g_1000.pth",
+        "unet_alpha": 1.0,
+        "text_encoder_alpha": 1.0,
+        "concept_name": "<watercolor_1> <watercolor_2>"
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "lora_path": "experiments/cat2/models/net_g_1000.pth",
+        "unet_alpha": 1.0,
+        "text_encoder_alpha": 1.0,
+        "concept_name": "<cat2_1> <cat2_2>"
+    },
+    {
+        "lora_path": "experiments/dog6/models/net_g_1000.pth",
+        "unet_alpha": 1.0,
+        "text_encoder_alpha": 1.0,
+        "concept_name": "<dog6_1> <dog6_2>"
+    }
+]
