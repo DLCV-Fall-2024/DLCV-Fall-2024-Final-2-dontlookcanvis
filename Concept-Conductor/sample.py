@@ -220,6 +220,7 @@ def load_config():
     parser.add_argument('--mask_update_interval', type=int, default=default_config.attention_operations.mask_update_interval)
     parser.add_argument('--mask_overlap_threshold', type=float, default=default_config.attention_operations.mask_overlap_threshold)
     parser.add_argument('--num_kmeans_init', type=int, default=default_config.attention_operations.num_kmeans_init)
+    parser.add_argument('--accum', type=bool, default=False)
     
     parser.add_argument('--rect_mask', action='store_true', default=default_config.attention_operations.rect_mask)
     parser.add_argument('--use_loss_mask', action='store_true', default=default_config.attention_operations.use_loss_mask)
@@ -236,6 +237,12 @@ def load_config():
             for param_name in new_config[param_type].keys():
                 config[param_name] = new_config[param_type][param_name]
             
+        import shutil
+        if not os.path.exists(config['outroot']):
+            os.mkdir(config['outroot'])
+        f2 = os.path.join(config['outroot'], args.config_file)
+        shutil.copyfile(args.config_file,f2)
+        print("copy", f2)
         
 
     return config
