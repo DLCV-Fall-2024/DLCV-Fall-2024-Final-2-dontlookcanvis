@@ -1,33 +1,89 @@
 # DLCV Final Project ( Multiple Concept Personalization )
 
-# How to run your code?
-* TODO: Please provide the scripts for TAs to reproduce your results, including training and inference. For example, 
+## Checkpoints download
+Please download all the checkpoints from: https://drive.google.com/drive/folders/1u2un5sqWEY7yj-U-1wgyN41BICqQ3wWm?usp=sharing
 
-```shell script=
-bash train.sh <Path to gt image folder> <Path to annot file>
-bash inference.sh <Path to gt image folder> <Path to annot file> <Path to output image folder>
-```
-
-# Usage
-To start working on this final project, you should clone this repository into your local machine by the following command:
+## Usage
 
     git clone https://github.com/DLCV-Fall-2024/DLCV-Fall-2024-Final-2-dontlookcanvis.git
-  
-Note that you should replace `<team_name>` with your own team name.
+    cd Concept-Conductor
+    pip install -r requirements.txt
 
-For more details, please click [this link](https://docs.google.com/presentation/d/1eeXx_dL0OgkDn9_lhXnimTHrE6OYvAiiVOBwo2CTVOQ/edit?usp=sharing) to view the slides of Final Project - Multiple Concept Personalization. **The introduction video for final project can be accessed in the slides.**
+### General Training and Inference
+```shell script=
+bash train.sh <path/to/config>
+bash inference.sh <path/to/config>
+```
+```<path/to/config>``` example: ```configs/train/stable-diffusion-v1-5/cat2.yml```
 
-## Checkpoints download
-ED-LoRAs are already pushed into this repository. For replication of our results on fused models, see the below links.
-### Mix of Show
-Composed ED-LoRAs: https://drive.google.com/drive/folders/1hsmbVbIrMK4EtPFHwlGLz1jd17ajbukv?usp=sharing
+### Peer review
+0. python scripts/... --xxx
 
-# Submission Rules
-### Deadline
-113/12/26 (Thur.) 23:59 (GMT+8)
+1.
+
+2.
+
+3.
+
+### CodaLab uploads
+0.
+
+1.
+
+2.
+
+3.
+
+
+### Poster results
+
+#### Attention Clustering Post-processing
+
+
+#### Mix of Show
+For reproduction of mix-of-show results, please clone this repository with ```--recursive``` to download the Mix-of-Show submodule.
+Please follow the environment setup in Mix of Show repository.
+```
+    cd Mix-of-Show
+    python setup.py install
     
-# Q&A
-If you have any problems related to Final Project, you may
-- Use TA hours
-- Contact TAs by e-mail ([ntudlcv@gmail.com](mailto:ntudlcv@gmail.com))
-- Post your question under `[Final challenge 2] Discussion` section in NTU Cool Discussion
+    # Clone diffusers==0.14.0 with T2I-Adapter support
+    git clone https://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p@github.com/guyuchao/diffusers-t2i-adapter.git
+
+    # switch to T2IAdapter-for-mixofshow
+    %cd diffusers-t2i-adapter
+    git switch T2IAdapter-for-mixofshow
+
+    # install from source
+    pip install .
+```
+... etc.
+
+To download checkpoints, execute:
+```
+    cd experiments/pretrained_models
+    gdown 16P7v_WQ46csK_KfXhmkt1iO9ulpkUjq8
+    unzip composed_edlora.zip
+    rm composed_edlora.zip
+```
+Please also download the stable-diffusion v1.4 model, and create soft link:
+```
+    ln -s <path/to/sd-v1-4> experiments/pretrained_models/stable-diffusion-v1-4
+```
+
+For inference, here we take the prompt-0 for example:
+```
+combined_model_root="experiments/composed_edlora/stable-diffusion-v1-4/"
+expdir="cat2+dog6"
+
+context_prompt="A <cat2> on the right and a <dog6> on the left."
+python Mix-of-Show/inference/mix_of_show_sample.py \
+  --pretrained_model="experiments/pretrained_models/stable-diffusion-v1-4" \
+  --combined_model="${combined_model_root}/${expdir}/combined_model_.pth" \
+  --save_dir="results/multi-concept/${expdir}" \
+  --pipeline_type="sd_pplus" \
+  --prompt="${context_prompt}" \
+  --suffix="" \
+  --n_samples=<n_sample_you_want>
+
+```
