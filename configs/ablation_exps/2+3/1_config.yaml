@@ -1,16 +1,14 @@
 inputs:
-  ref_prompt: "Three rectangle layouts"
-  base_prompt: "A `dog, a `pet cat and a `dog near a forest"
+  ref_prompt: "A rectangle layout."
+  base_prompt: "A `flower in a `vase."
   negative_prompt: ""
   custom_prompts:
-    - "A <dog_1> `<dog_2>, a pet cat and a dog near a forest"
-    - "A dog, a <pet_cat1_1> `<pet_cat1_2> and a dog near a forest"
-    - "A dog, a pet cat and a <dog6_1> `<dog6_2> near a forest"
-  ref_image_path: "mask/prompt_2/ref_image_0.png"
+    - "A <flower_1_1> `<flower_1_2> in a vase."
+    - "A flower in a <vase_1> `<vase_2>."
+  ref_image_path: "mask/prompt_1/ref_image_0.png"
   ref_mask_paths:
-    - "mask/prompt_2/ref_image_0_dog_1.png"
-    - "mask/prompt_2/ref_image_0_cat.png"
-    - "mask/prompt_2/ref_image_0_dog_2.png"
+    - "mask/prompt_1/ref_image_0_flower.png"
+    - "mask/prompt_1/ref_image_0_vase.png"
   init_mask_from_points: False
   mask_center_points:
     - [350, 200]
@@ -18,14 +16,13 @@ inputs:
   init_image_path: ~
   init_mask_path: ~
   edlora_paths:
-    - "experiments/chilloutmix/dog/models/edlora_model-latest.pth"
-    - "experiments/chilloutmix/pet_cat1/models/edlora_model-latest.pth"
-    - "experiments/chilloutmix/dog6/models/edlora_model-latest.pth"
+    - "experiments/chilloutmix/flower_1/models/edlora_model-latest.pth"
+    - "experiments/chilloutmix/vase/models/edlora_model-latest.pth"
   load_edlora: True
-  lora_alpha: 0.7
+  lora_alpha: 0.75
 
 outputs:
-  outroot: "outputs/2_2"
+  outroot: "outputs/2+3_1"
   image_outdir: "inference_results"
   latents_outdir: "inverted_latents"
   self_attn_outdir: "self_attn"
@@ -50,7 +47,7 @@ sd_t2i:
 attention_operations:
   attn_guidance_end: 60
   attn_guidance_interval: 1
-  attn_guidance_weight: 3
+  attn_guidance_weight: 7
   custom_attn_guidance_factor: 1.5
 
   processor_filter_guidance: '.*up_blocks\.1\.attentions\.0.*attn1.*'
@@ -66,13 +63,14 @@ attention_operations:
 
   mask_refinement_start: 50
   mask_refinement_end: 80
-  mask_update_interval: 10
-  mask_overlap_threshold: 0.4
+  mask_update_interval: 5
+  mask_overlap_threshold: 0
   num_kmeans_init: 200
   rect_mask: False
+  accum: True
 
   use_loss_mask: True
-  visualization: True
+  visualization: False
 
 
 
