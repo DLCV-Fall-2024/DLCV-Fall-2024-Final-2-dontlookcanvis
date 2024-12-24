@@ -1,0 +1,42 @@
+[
+    {
+        "dog": {"height": 125, "width": 167, "top": 71, "left": 9},
+        "cat": {"height": 100, "width": 159, "top": 67, "left": 200}
+    },
+    {
+        "dog": {"height": 80, "width": 100, "top": 140, "left": 20},
+        "cat": {"height": 60, "width": 90, "top": 150, "left": 200}
+    },
+    {
+        "dog": {"height": 110, "width": 90, "top": 60, "left": 30},
+        "cat": {"height": 100, "width": 80, "top": 50, "left": 190}
+    },
+    {
+        "dog": {"height": 140, "width": 120, "top": 50, "left": 10},
+        "cat": {"height": 100, "width": 90, "top": 100, "left": 210}
+    },
+    {
+        "dog": {"height": 130, "width": 110, "top": 80, "left": 15},
+        "cat": {"height": 85, "width": 65, "top": 85, "left": 220}
+    },
+    {
+        "dog": {"height": 90, "width": 100, "top": 90, "left": 25},
+        "cat": {"height": 70, "width": 50, "top": 120, "left": 190}
+    },
+    {
+        "dog": {"height": 75, "width": 115, "top": 110, "left": 5},
+        "cat": {"height": 55, "width": 65, "top": 100, "left": 230}
+    },
+    {
+        "dog": {"height": 110, "width": 130, "top": 75, "left": 10},
+        "cat": {"height": 85, "width": 65, "top": 85, "left": 215}
+    },
+    {
+        "dog": {"height": 100, "width": 150, "top": 60, "left": 30},
+        "cat": {"height": 80, "width": 70, "top": 90, "left": 200}
+    },
+    {
+        "dog": {"height": 120, "width": 140, "top": 70, "left": 20},
+        "cat": {"height": 100, "width": 90, "top": 50, "left": 210}
+    }
+]

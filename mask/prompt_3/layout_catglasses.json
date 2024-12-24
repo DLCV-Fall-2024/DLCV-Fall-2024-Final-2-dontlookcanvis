@@ -1,0 +1,42 @@
+[
+    {
+        "cat": {"width": 110, "height": 140, "left": 30, "top": 40},
+        "glasses": {"width": 50, "height": 30, "left": 50, "top": 60}
+    },
+    {
+        "cat": {"width": 130, "height": 160, "left": 90, "top": 20},
+        "glasses": {"width": 45, "height": 25, "left": 110, "top": 70}
+    },
+    {
+        "cat": {"width": 140, "height": 170, "left": 10, "top": 60},
+        "glasses": {"width": 55, "height": 35, "left": 30, "top": 100}
+    },
+    {
+        "cat": {"width": 125, "height": 155, "left": 70, "top": 90},
+        "glasses": {"width": 48, "height": 28, "left": 100, "top": 110}
+    },
+    {
+        "cat": {"width": 135, "height": 165, "left": 120, "top": 10},
+        "glasses": {"width": 60, "height": 40, "left": 140, "top": 50}
+    },
+    {
+        "cat": {"width": 128, "height": 158, "left": 40, "top": 120},
+        "glasses": {"width": 50, "height": 30, "left": 60, "top": 140}
+    },
+    {
+        "cat": {"width": 145, "height": 175, "left": 80, "top": 70},
+        "glasses": {"width": 65, "height": 45, "left": 100, "top": 100}
+    },
+    {
+        "cat": {"width": 115, "height": 145, "left": 60, "top": 50},
+        "glasses": {"width": 40, "height": 20, "left": 80, "top": 80}
+    },
+    {
+        "cat": {"width": 120, "height": 150, "left": 20, "top": 10},
+        "glasses": {"width": 55, "height": 35, "left": 50, "top": 40}
+    },
+    {
+        "cat": {"width": 132, "height": 162, "left": 90, "top": 130},
+        "glasses": {"width": 52, "height": 32, "left": 110, "top": 160}
+    }
+]

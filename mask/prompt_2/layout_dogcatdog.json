@@ -1,0 +1,52 @@
+[
+    {
+        "dog_1": {"height": 120, "width": 90, "top": 50, "left": 30},
+        "cat": {"height": 80, "width": 70, "top": 120, "left": 100},
+        "dog_2": {"height": 150, "width": 110, "top": 30, "left": 170}
+    },
+    {
+        "dog_1": {"height": 140, "width": 100, "top": 20, "left": 40},
+        "cat": {"height": 70, "width": 60, "top": 100, "left": 90},
+        "dog_2": {"height": 160, "width": 120, "top": 40, "left": 180}
+    },
+    {
+        "dog_1": {"height": 130, "width": 95, "top": 60, "left": 20},
+        "cat": {"height": 85, "width": 65, "top": 110, "left": 110},
+        "dog_2": {"height": 145, "width": 105, "top": 50, "left": 150}
+    },
+    {
+        "dog_1": {"height": 110, "width": 80, "top": 40, "left": 50},
+        "cat": {"height": 90, "width": 75, "top": 130, "left": 90},
+        "dog_2": {"height": 120, "width": 100, "top": 70, "left": 180}
+    },
+    {
+        "dog_1": {"height": 125, "width": 85, "top": 55, "left": 35},
+        "cat": {"height": 100, "width": 80, "top": 105, "left": 115},
+        "dog_2": {"height": 130, "width": 95, "top": 65, "left": 165}
+    },
+    {
+        "dog_1": {"height": 135, "width": 90, "top": 45, "left": 60},
+        "cat": {"height": 95, "width": 85, "top": 115, "left": 85},
+        "dog_2": {"height": 140, "width": 100, "top": 35, "left": 150}
+    },
+    {
+        "dog_1": {"height": 150, "width": 110, "top": 30, "left": 20},
+        "cat": {"height": 70, "width": 50, "top": 140, "left": 90},
+        "dog_2": {"height": 130, "width": 90, "top": 50, "left": 200}
+    },
+    {
+        "dog_1": {"height": 120, "width": 100, "top": 40, "left": 30},
+        "cat": {"height": 85, "width": 65, "top": 120, "left": 110},
+        "dog_2": {"height": 110, "width": 95, "top": 80, "left": 180}
+    },
+    {
+        "dog_1": {"height": 130, "width": 85, "top": 25, "left": 70},
+        "cat": {"height": 90, "width": 70, "top": 110, "left": 80},
+        "dog_2": {"height": 125, "width": 90, "top": 50, "left": 160}
+    },
+    {
+        "dog_1": {"height": 140, "width": 100, "top": 20, "left": 40},
+        "cat": {"height": 75, "width": 60, "top": 130, "left": 100},
+        "dog_2": {"height": 150, "width": 105, "top": 40, "left": 180}
+    }
+]
