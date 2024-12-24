@@ -1,6 +1,3 @@
-[submodule "Concept-Conductor"]
-	path = Concept-Conductor
-	url = https://github.com/Nihukat/Concept-Conductor.git
 [submodule "Mix-of-Show"]
 	path = Mix-of-Show
 	url = https://github.com/TencentARC/Mix-of-Show.git
