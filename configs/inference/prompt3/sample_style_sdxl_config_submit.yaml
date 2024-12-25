@@ -43,7 +43,7 @@ sd_t2i:
   num_inference_steps: 200
   start_seed: 107
   batch_size: 1
-  n_batches: 32
+  n_batches: 10
   verbose: False
 
 attention_operations:
