@@ -33,7 +33,7 @@ outputs:
 
 
 base_model:
-  sd_ckpt: "experiments/pretrained_models/realvis"
+  sd_ckpt: "experiments/pretrained_models/RealVisXL_V5.0"
   variant: "fp16"
 
 sd_t2i:
