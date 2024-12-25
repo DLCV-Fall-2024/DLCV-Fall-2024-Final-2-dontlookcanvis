@@ -26,7 +26,7 @@ $ git clone https://huggingface.co/sd-legacy/stable-diffusion-v1-5
 bash train.sh <path/to/config>
 ```
 ## Inference
-You can choose whether to pass $1 as the path to the output image folder. If it is not provided, the ./test_output directory, located at the same level as the bash script, will automatically be used to store the output images.
+You can choose whether to pass `$1` as the path to the output image folder. If it is not provided, the `./test_output directory`, located at the same level as the bash script, will automatically be used to store the output images.
 ```shell
 $ bash inference.sh <path/to/config>
 ```
