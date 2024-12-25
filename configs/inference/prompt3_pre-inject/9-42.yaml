@@ -1,34 +1,32 @@
 inputs:
   ref_prompt: "A rectangle layout."
-  base_prompt: "A `flower in a `vase."
-  negative_prompt: ""
+  base_prompt: "A `cat wearing `wearable glasses in a watercolor style."
+  negative_prompt: "lowres, bad anatomy, text, error, cropped, worst quality, low quality, normal quality, jpeg artifacts, blurry, round-framed glasses"
   custom_prompts:
-    - "A <flower_1_1> `<flower_1_2> in a vase."
-    - "flower in a `<vase_1> `<vase_2>."
-  ref_image_path: "./mask/prompt_1/mask1/layout_mask.png"
+    - "A <gray_cat_1> `<gray_cat_2> wearing wearable glasses in a watercolor style"
+    - "A cat wearing <wearable_glasses_1> `<wearable_glasses_2> in a watercolor style."
+  ref_image_path: "mask/prompt_3/ref_image_9.png"
   ref_mask_paths:
-    - "./mask/prompt_1/mask1/flower_mask.png"
-    - "./mask/prompt_1/mask1/vase_mask.png"
+    - "mask/prompt_3/ref_image_9_cat.png"
+    - "mask/prompt_3/ref_image_9_glasses.png"
   init_mask_from_points: False
   mask_center_points:
-    - [350, 200]
-    - [150, 300]
   init_image_path: ~
   init_mask_path: ~
   edlora_paths:
-    - "experiments/chilloutmix/flower_1/models/edlora_model-latest.pth"
-    - "experiments/chilloutmix/vase/models/edlora_model-latest.pth"
+    - "experiments/ED-LoRAs/real/gray_cat.pth"
+    - "experiments/chilloutmix/wearable_glasses/models/edlora_model-latest.pth"
   load_edlora: True
-  lora_alpha: 0.75
+  lora_alpha: 0.5
 
 outputs:
-  outroot: "outputs/prompt1/2_5"
+  outroot: "outputs/prompt3_pre-inject/9_42"
   image_outdir: "inference_results"
   latents_outdir: "inverted_latents"
   self_attn_outdir: "self_attn"
   cross_attn_outdir: "cross_attn"
   feature_mask_outdir: "feature_mask"
-
+#
 
 base_model:
   sd_ckpt: "experiments/pretrained_models/chilloutmix"
@@ -39,7 +37,7 @@ sd_t2i:
   width: 512
   guidance_scale: 7.5
   num_inference_steps: 200
-  start_seed: 1234579
+  start_seed: 42
   batch_size: 1
   n_batches: 1
   verbose: False
@@ -47,11 +45,11 @@ sd_t2i:
 attention_operations:
   attn_guidance_end: 60
   attn_guidance_interval: 1
-  attn_guidance_weight: 7
+  attn_guidance_weight: 3.0
   custom_attn_guidance_factor: 1.5
 
   processor_filter_guidance: '.*up_blocks\.1\.attentions\.0.*attn1.*'
-  params_guidance: ["key"]
+  params_guidance: ["query", "key"]
   processor_filter_mask: '.*up_blocks\.2\.attentions\.2.*attn1.*'
   params_mask: ['attention_probs']
   processor_filter_merge: '.*up_blocks.*'
@@ -64,7 +62,7 @@ attention_operations:
   mask_refinement_start: 50
   mask_refinement_end: 80
   mask_update_interval: 5
-  mask_overlap_threshold: 0.5
+  mask_overlap_threshold: 0.99
   num_kmeans_init: 200
   rect_mask: True
 

@@ -22,7 +22,7 @@ inputs:
   lora_alpha: 0.8
 
 outputs:
-  outroot: "outputs/2_3"
+  outroot: "outputs/prompt1/2_3"
   image_outdir: "inference_results"
   latents_outdir: "inverted_latents"
   self_attn_outdir: "self_attn"
