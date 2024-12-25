@@ -40,10 +40,14 @@ def sample(args):
     else:
         logging.disable_progress_bar()
 
-    (Path(args.outroot)/Path(args.image_outdir)).mkdir(parents=True, exist_ok=True)
-    sample_dir = str(Path(args.outroot) / Path(args.image_outdir) / Path(f"samples"))
-    Path(sample_dir).mkdir(exist_ok=True)
-    base_count = len(list(Path(sample_dir).iterdir()))
+    # (Path(args.outroot)/Path(args.image_outdir)).mkdir(parents=True, exist_ok=True)
+    # sample_dir = str(Path(args.outroot) / Path(args.image_outdir) / Path(f"samples"))
+    # Path(sample_dir).mkdir(exist_ok=True)
+
+    # Inference
+    image_path = str(Path(args.outimg_dir) / Path(args.prompt_num))
+    os.makedirs(image_path,exist_ok=True)
+    base_count = len(list(Path(image_path).iterdir()))
     
     all_images = []
     progress_bar = tqdm(total=args.n_batches * args.batch_size)
@@ -133,14 +137,17 @@ def sample(args):
             
         for j, image in enumerate(images):
             truncated_text = truncate_text(args.base_prompt, 200)
-            file_name = f'{base_count:05}_{truncated_text}_{(seed+j):02}.png'
-            image.save(str(Path(sample_dir)/Path(file_name)))
+            # file_name = f'{base_count:05}_{truncated_text}_{(seed+j):02}.png'
+            # image.save(str(Path(sample_dir)/Path(file_name)))
+            file_name = f'{base_count:05}.png'
+            image.save(str(Path(image_path)/Path(file_name)))
             base_count += 1
             progress_bar.update(1)             
         
         all_images += images
         seed += args.batch_size
     progress_bar.close()
+    '''
     file_name = f'{base_prompt.replace("/"," ")[:242]}_seed{args.start_seed}-{args.start_seed+args.n_batches*args.batch_size-1}.png'
     
     n_images = len(all_images)
@@ -156,7 +163,7 @@ def sample(args):
     grid = Image.fromarray(grid)  
     grid.save(str(Path(args.outroot) / Path(args.image_outdir) / Path(file_name)))
     print(f"Your samples are ready and waiting for you here: \n{args.outroot}/{args.image_outdir} \n\nEnjoy.")
-
+    '''
 def load_config():
     default_config = OmegaConf.load('configs/sample_sdxl_config.yaml')
     
@@ -164,6 +171,9 @@ def load_config():
     
     parser.add_argument('--config_file', type=str, default='')
     
+    parser.add_argument('--outimg_dir', type=str, default='')
+    parser.add_argument('--prompt_num', type=str, default='')
+
     parser.add_argument('--ref_prompt', type=str, default=default_config.inputs.ref_prompt)
     parser.add_argument('--base_prompt', type=str, default=default_config.inputs.base_prompt)
     parser.add_argument('--negative_prompt', type=str, default=default_config.inputs.negative_prompt)
