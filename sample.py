@@ -41,7 +41,7 @@ def sample(args):
     else:
         logging.disable_progress_bar()
 
-    (Path(args.outroot)/Path(args.image_outdir)).mkdir(parents=True, exist_ok=True)
+    # (Path(args.outroot)/Path(args.image_outdir)).mkdir(parents=True, exist_ok=True)
     # sample_dir = str(Path(args.outroot) / Path(args.image_outdir) / Path(f"samples"))
     # Path(sample_dir).mkdir(exist_ok=True)
 
