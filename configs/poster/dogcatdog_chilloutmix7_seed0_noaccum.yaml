@@ -1,0 +1,74 @@
+inputs:
+  ref_prompt: "A `dog, a pet `cat and a `dog near a forest."
+  base_prompt: "A `dog, a pet `cat and a `dog near a forest."
+  negative_prompt: ""
+  custom_prompts:
+    - "A <dog_1> `<dog_2>, a <dog_1> `<dog_2> and a <dog_1> `<dog_2> near a forest."
+    - "A <pet_cat1_1> `<pet_cat1_2>, a <pet_cat1_1> `<pet_cat1_2> and a <pet_cat1_1> `<pet_cat1_2> near a forest."
+    - "A <dog6_1> `<dog6_2>, a <dog6_1> `<dog6_2> and a <dog6_1> `<dog6_2> near a forest."
+  ref_image_path: "examples/dog-cat-dog_chilloutmix7_mask.png"
+  ref_mask_paths:
+    - "examples/dog-cat-dog_chilloutmix7_1.png"
+    - "examples/dog-cat-dog_chilloutmix7_2.png"
+    - "examples/dog-cat-dog_chilloutmix7_3.png"
+  init_mask_from_points: False
+  init_image_path: ~
+  init_mask_path: ~       
+  edlora_paths:
+    - "experiments/chilloutmix/dog/models/edlora_model-latest.pth"
+    - "experiments/chilloutmix/pet_cat1/models/edlora_model-latest.pth"
+    - "experiments/chilloutmix/dog6/models/edlora_model-latest.pth"
+  load_edlora: True
+  lora_alpha: 0.8
+
+outputs:
+  outroot: "outputs/dogcatdog_chilloutmix7_seed0_noaccum-thres0"
+  image_outdir: "inference_results"
+  latents_outdir: "inverted_latents"
+  self_attn_outdir: "self_attn"
+  cross_attn_outdir: "cross_attn"
+  feature_mask_outdir: "feature_mask"
+
+
+base_model:
+  sd_ckpt: "experiments/pretrained_models/chilloutmix" #stable-diffusion-v1-5" #
+  variant: ""
+
+sd_t2i:
+  height: 512
+  width: 512
+  guidance_scale: 7.5
+  num_inference_steps: 100
+  start_seed: 0
+  batch_size: 1
+  n_batches: 1
+  verbose: False
+
+attention_operations:
+  attn_guidance_end: 60 # 變長
+  attn_guidance_interval: 1
+  attn_guidance_weight: 10 #7.0
+  custom_attn_guidance_factor: 3 #1.2
+
+  processor_filter_guidance: '.*up_blocks\.1\.attentions\.0.*attn1.*'
+  params_guidance: ["key"] #[query", "key"]
+  processor_filter_mask: '.*up_blocks\.2\.attentions\.2.*attn1.*'
+  params_mask: ['attention_probs']
+  processor_filter_merge: '.*up_blocks.*'
+  params_merge: ["feature_output"]
+  processor_filter_view_sa: '.*up_blocks\.2\.attentions\.2.*attn1.*'
+  params_view_sa: ["attention_probs"]      
+  processor_filter_view_ca: '.*up_blocks\.2\.attentions\.1.*attn2.*'
+  params_view_ca: ["attention_probs"]    
+
+  mask_refinement_start: 50
+  mask_refinement_end: 80 # 變短
+  mask_update_interval: 5
+  mask_overlap_threshold: 0
+  num_kmeans_init: 300 # 改
+  num_clusters: 6
+  rect_mask: False #True # 長方形
+  accum: False
+
+  use_loss_mask: True
+  visualization: True

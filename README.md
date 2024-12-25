@@ -1,27 +1,34 @@
 # DLCV Final Project ( Multiple Concept Personalization )
 
-## Checkpoints download
+# Checkpoints download
 Please download all the checkpoints from: https://drive.google.com/drive/folders/1u2un5sqWEY7yj-U-1wgyN41BICqQ3wWm?usp=sharing
+You can also use ED-LoRA directly from the 
 
-## Usage
+# Usage
 
     git clone https://github.com/DLCV-Fall-2024/DLCV-Fall-2024-Final-2-dontlookcanvis.git
     cd Concept-Conductor
     pip install -r requirements.txt
 
-### General Training and Inference
+## General Training and Inference
 ```shell script=
 bash train.sh <path/to/config>
 bash inference.sh <path/to/config>
 ```
 ```<path/to/config>``` example: ```configs/train/stable-diffusion-v1-5/cat2.yml```
 
+## Reproduce experimental results
 ### Peer review
-0. python scripts/... --xxx
-
+0. ```
+cd Concept-Conductor
+bash ../scripts/inf0_2.sh
+```
 1.
 
-2.
+2.```
+cd Concept-Conductor
+bash ../scripts/inf2_2.sh
+```
 
 3.
 
