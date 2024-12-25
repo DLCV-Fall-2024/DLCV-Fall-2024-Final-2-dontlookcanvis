@@ -18,8 +18,10 @@ Execute in `./experiments/pretrained_models`
 ```shell
 $ git-lfs clone https://huggingface.co/windwhinny/chilloutmix.git
 $ git clone https://huggingface.co/sd-legacy/stable-diffusion-v1-5
-```shell
-** Install environment**
+$ git-lfs clone https://huggingface.co/SG161222/RealVisXL_V5.0.git
+```
+
+**Install environment**
 In the repository folder,
 ```shell
 $ pip install -r requirements.txt
@@ -27,7 +29,7 @@ $ pip install -r requirements.txt
 
 ## General Training
 First generate needed files using
-```
+```shell
 $ python scripts/data_format --input_images
 ```
 

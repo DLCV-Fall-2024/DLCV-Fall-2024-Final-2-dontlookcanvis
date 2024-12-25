@@ -6,6 +6,7 @@ student_data/*
 sample_submission.csv
 experiments/pretrained_models/chilloutmix
 experiments/pretrained_models/stable-diffusion-v1-5*
+experiments/pretrained_models/RealVisXL_V5.0*
 test_output*
 test_prompt0*
 test_prompt1*
