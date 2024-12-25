@@ -1,2 +1,13 @@
-cd Concept-Conductor
-python sample.py --config_file $1
+# Prompt 2 directory
+
+# $1 : <Path to output image folder>
+# Folder contains prompt 1's config files
+
+# Folder contains prompt 2's config files
+prompt2_folder="./configs/inference/prompt2"
+
+
+for config_file in "$prompt2_folder"/*; do
+  echo "$config_file" 
+  python sample.py --config_file "$config_file" --outimg_dir "./test_prompt2" --prompt_num "2"
+done

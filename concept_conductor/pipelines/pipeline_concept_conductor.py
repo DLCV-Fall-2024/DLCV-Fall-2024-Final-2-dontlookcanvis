@@ -84,7 +84,7 @@ class ConceptConductorPipeline(StableDiffusionPipeline):
         init_image: PIL.Image.Image = None,
         init_mask:PIL.Image.Image = None,
         edloras: List = None,
-        lora_alpha: List = None, #int = 0.7,
+        lora_alpha: int = 0.7,
         
         outroot: str = "outputs",
         latents_outdir: str = "inverted_latents",
@@ -357,7 +357,7 @@ class ConceptConductorPipeline(StableDiffusionPipeline):
                     
                 text_encoder_lora_state_dict = state_dict['text_encoder']
                 pretrained_text_encoder_state_dict = self.text_encoder.state_dict()
-                updated_text_encoder_state_dict = merge_lora_into_weight(pretrained_text_encoder_state_dict, text_encoder_lora_state_dict, model_type='text_encoder', alpha=lora_alpha[rid])
+                updated_text_encoder_state_dict = merge_lora_into_weight(pretrained_text_encoder_state_dict, text_encoder_lora_state_dict, model_type='text_encoder', alpha=lora_alpha)
                 self.text_encoder.load_state_dict(updated_text_encoder_state_dict)    
                 del text_encoder_lora_state_dict
                 gc.collect()
@@ -650,7 +650,7 @@ class ConceptConductorPipeline(StableDiffusionPipeline):
                             state_dict = edloras[rid]
                             unet_lora_state_dict = state_dict['unet']
                             pretrained_unet_state_dict = custom_unet.state_dict()
-                            updated_unet_state_dict = merge_lora_into_weight(pretrained_unet_state_dict, unet_lora_state_dict, model_type='unet', alpha=lora_alpha[rid])
+                            updated_unet_state_dict = merge_lora_into_weight(pretrained_unet_state_dict, unet_lora_state_dict, model_type='unet', alpha=lora_alpha)
                             custom_unet.load_state_dict(updated_unet_state_dict)
                             
                             del unet_lora_state_dict
@@ -717,7 +717,6 @@ class ConceptConductorPipeline(StableDiffusionPipeline):
                                 
                     layout_loss = self._compute_layout_loss(attention_controller,processors_guidance=processors_guidance, params_guidance=params_guidance, 
                                                                   custom_attn_guidance_factor=custom_attn_guidance_factor, use_loss_mask=use_loss_mask)
-                    print("layout_loss", layout_loss.item(), flush=True)
 
                     # Update input latents with gradient descent.
                     gradient = torch.autograd.grad(layout_loss, latents, allow_unused=True)[0]  
@@ -755,7 +754,7 @@ class ConceptConductorPipeline(StableDiffusionPipeline):
                             state_dict = edloras[rid]
                             unet_lora_state_dict = state_dict['unet']
                             pretrained_unet_state_dict = custom_unet.state_dict()
-                            updated_unet_state_dict = merge_lora_into_weight(pretrained_unet_state_dict, unet_lora_state_dict, model_type='unet', alpha=lora_alpha[rid])
+                            updated_unet_state_dict = merge_lora_into_weight(pretrained_unet_state_dict, unet_lora_state_dict, model_type='unet', alpha=lora_alpha)
                             custom_unet.load_state_dict(updated_unet_state_dict)  
                             
                             del state_dict
@@ -873,8 +872,6 @@ class ConceptConductorPipeline(StableDiffusionPipeline):
                         step_idx = step // getattr(self.scheduler, "order", 1)
                         callback(step_idx, t, latents)
         
-        print(attention_controller.kmeans_info, flush=True)
-        json.dump(attention_controller.kmeans_info, open(os.path.join(outroot, "kmeans_info.json"), "w"), indent=4)
         del attention_controller
         gc.collect()
         torch.cuda.empty_cache() 
@@ -922,7 +919,7 @@ class ConceptConductorPipeline(StableDiffusionPipeline):
                     foreground_mask = torch.ones_like(ref_attn)
 
                 model_losses = [] 
-                
+
                 for model_idx in range(len(attention_controller)-1):
                     attn = attention_controller.extract(model_idx, processor_name, param_name)
                     

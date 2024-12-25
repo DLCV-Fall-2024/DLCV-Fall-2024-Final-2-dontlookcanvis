@@ -42,9 +42,14 @@ def sample(args):
         logging.disable_progress_bar()
 
     (Path(args.outroot)/Path(args.image_outdir)).mkdir(parents=True, exist_ok=True)
-    sample_dir = str(Path(args.outroot) / Path(args.image_outdir) / Path(f"samples"))
-    Path(sample_dir).mkdir(exist_ok=True)
-    base_count = len(list(Path(sample_dir).iterdir()))
+    # sample_dir = str(Path(args.outroot) / Path(args.image_outdir) / Path(f"samples"))
+    # Path(sample_dir).mkdir(exist_ok=True)
+
+    # Inference
+    image_path = str(Path(args.outimg_dir) / Path(args.prompt_num))
+    # Path(image_path).mkdir(exist_ok=True)
+    os.makedirs(image_path,exist_ok=True)
+    base_count = len(list(Path(image_path).iterdir()))
     
     all_images = []
     progress_bar = tqdm(total=args.n_batches * args.batch_size)
@@ -134,14 +139,17 @@ def sample(args):
             
         for j, image in enumerate(images):
             truncated_text = truncate_text(args.base_prompt, 200)
-            file_name = f'{base_count:05}_{truncated_text}_{(seed+j):02}.png'
-            image.save(str(Path(sample_dir)/Path(file_name)))
+            # file_name = f'{base_count:05}_{truncated_text}_{(seed+j):02}.png'
+            # image.save(str(Path(sample_dir)/Path(file_name)))
+            file_name = f'{base_count:05}.png'
+            image.save(str(Path(image_path)/Path(file_name)))
             base_count += 1
             progress_bar.update(1)             
         
         all_images += images
         seed += args.batch_size
     progress_bar.close()
+    '''
     file_name = f'{base_prompt.replace("/"," ")[:242]}_seed{args.start_seed}-{args.start_seed+args.n_batches*args.batch_size-1}.png'
     
     n_images = len(all_images)
@@ -157,7 +165,7 @@ def sample(args):
     grid = Image.fromarray(grid)  
     grid.save(str(Path(args.outroot) / Path(args.image_outdir) / Path(file_name)))
     print(f"Your samples are ready and waiting for you here: \n{args.outroot}/{args.image_outdir} \n\nEnjoy.")
-
+    '''
 def load_config():
     default_config = OmegaConf.load('configs/sample_config.yaml')
     
@@ -165,6 +173,9 @@ def load_config():
     
     parser.add_argument('--config_file', type=str, default='')
     
+    parser.add_argument('--outimg_dir', type=str, default='')
+    parser.add_argument('--prompt_num', type=str, default='')
+
     parser.add_argument('--ref_prompt', type=str, default=default_config.inputs.ref_prompt)
     parser.add_argument('--base_prompt', type=str, default=default_config.inputs.base_prompt)
     parser.add_argument('--negative_prompt', type=str, default=default_config.inputs.negative_prompt)
@@ -220,7 +231,6 @@ def load_config():
     parser.add_argument('--mask_update_interval', type=int, default=default_config.attention_operations.mask_update_interval)
     parser.add_argument('--mask_overlap_threshold', type=float, default=default_config.attention_operations.mask_overlap_threshold)
     parser.add_argument('--num_kmeans_init', type=int, default=default_config.attention_operations.num_kmeans_init)
-    parser.add_argument('--accum', type=bool, default=False)
     
     parser.add_argument('--rect_mask', action='store_true', default=default_config.attention_operations.rect_mask)
     parser.add_argument('--use_loss_mask', action='store_true', default=default_config.attention_operations.use_loss_mask)
@@ -237,12 +247,6 @@ def load_config():
             for param_name in new_config[param_type].keys():
                 config[param_name] = new_config[param_type][param_name]
             
-        import shutil
-        if not os.path.exists(config['outroot']):
-            os.mkdir(config['outroot'])
-        f2 = os.path.join(config['outroot'], args.config_file)
-        shutil.copyfile(args.config_file,f2)
-        print("copy", f2)
         
 
     return config

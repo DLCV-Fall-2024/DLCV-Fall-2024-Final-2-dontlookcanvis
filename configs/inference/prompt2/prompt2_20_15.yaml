@@ -6,11 +6,11 @@ inputs:
     - "A <dog_1> `<dog_2>, a pet cat and a dog near a forest."
     - "A dog, a <pet_cat1_1> `<pet_cat1_2> and a dog near a forest."
     - "A dog, a pet cat and a <dog6_1> `<dog6_2> near a forest."
-  ref_image_path: "../mask/mask2/layout_mask.png"
+  ref_image_path: "./mask/prompt_2/mask2/layout_mask.png"
   ref_mask_paths:
-    - "../mask/mask2/dog0_mask.png"
-    - "../mask/mask2/cat_mask.png"
-    - "../mask/mask2/dog1_mask.png"
+    - "./mask/prompt_2/mask2/dog0_mask.png"
+    - "./mask/prompt_2/mask2/cat_mask.png"
+    - "./mask/prompt_2/mask2/dog1_mask.png"
   init_mask_from_points: False
   init_image_path: ~
   init_mask_path: ~       
@@ -22,7 +22,7 @@ inputs:
   lora_alpha: 0.8
 
 outputs:
-  outroot: "outputs/prompt2/prompt2_22"
+  outroot: "outputs/prompt2_20"
   image_outdir: "inference_results"
   latents_outdir: "inverted_latents"
   self_attn_outdir: "self_attn"
@@ -39,7 +39,7 @@ sd_t2i:
   width: 512
   guidance_scale: 7.5
   num_inference_steps: 200
-  start_seed: 89
+  start_seed: 207
   batch_size: 1
   n_batches: 1
   verbose: False

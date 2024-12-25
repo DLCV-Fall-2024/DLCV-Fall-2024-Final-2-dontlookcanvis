@@ -4,3 +4,8 @@
 
 student_data/*
 sample_submission.csv
+experiments/pretrained_models/chilloutmix
+test_prompt2*
+outputs*
+**_pycache__**
+diff*
