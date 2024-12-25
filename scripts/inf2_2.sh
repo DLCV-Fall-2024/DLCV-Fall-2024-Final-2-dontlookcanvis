@@ -1,6 +1,7 @@
-for i in $(seq 0 9); do
-    CUDA_VISIBLE_DEVICES=2 python sample.py --config_file ../configs/ablation_exps/2/2_config.yaml \
-    --ref_image_path ../mask/prompt_2/ref_image_${i}.png \
-    --ref_mask_paths ../mask/prompt_2/ref_image_${i}_dog_1.png ../mask/prompt_2/ref_image_${i}_cat.png ../mask/prompt_2/ref_image_${i}_dog_2.png\
+i=0
+for config  in ../configs/prompt2_config1/*.yaml; do
+    echo $config, $i
+    CUDA_VISIBLE_DEVICES=2 python sample.py --config_file ${config} \
     --outroot outputs/2_2_$i
+    i="$(($i + 1))"
 done

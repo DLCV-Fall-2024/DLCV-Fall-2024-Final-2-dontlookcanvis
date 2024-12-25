@@ -1,7 +1,7 @@
-for i in $(seq 0 9); do
-    # echo ../mask/prompt_0/ref_image_${i}.png
-    CUDA_VISIBLE_DEVICES=4 python sample.py --config_file ../configs/ablation_exps/2+3/0_config.yaml \
-    --ref_image_path ../mask/prompt_0/ref_image_${i}.png \
-    --ref_mask_paths ../mask/prompt_0/ref_image_${i}_dog.png ../mask/prompt_0/ref_image_${i}_cat.png \
-    --outroot outputs/2+3_0_$i
+i=0
+for config  in ../configs/prompt0_config1/*.yaml; do
+    echo $config, $i
+    CUDA_VISIBLE_DEVICES=0 python sample.py --config_file ${config} \
+    --outroot outputs/2+3_0_$i  --accum True
+    i="$(($i + 1))"
 done

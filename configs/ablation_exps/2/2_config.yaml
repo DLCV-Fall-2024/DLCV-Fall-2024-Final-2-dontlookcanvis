@@ -67,7 +67,7 @@ attention_operations:
   mask_refinement_start: 50
   mask_refinement_end: 80
   mask_update_interval: 10
-  mask_overlap_threshold: 0 #0.4
+  mask_overlap_threshold: 0.4
   num_kmeans_init: 200
   rect_mask: False
   accum: False

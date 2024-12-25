@@ -7,8 +7,8 @@ inputs:
     - "A cat on the right and a <dog6_1> `<dog6_2> on the left."
   ref_image_path: "mask/prompt_0/ref_image_0.png"
   ref_mask_paths:
-    - "mask/prompt_0/ref_image_0_dog.png"
     - "mask/prompt_0/ref_image_0_cat.png"
+    - "mask/prompt_0/ref_image_0_dog.png"
   init_mask_from_points: False
   mask_center_points:
     - [350, 200]
