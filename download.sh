@@ -3,7 +3,5 @@ wget -O SDXL.zip https://www.dropbox.com/scl/fi/wr8fpypgp8nuhwvhl6jo3/SDXL.zip?r
 unzip SDXL.zip
 mv SDXL experiments/
 rm SDXL.zip
-rm 'SDXL.zip?rlkey=82wfvgjl5vrx5jtakvzvfrbsf'
 
-# To get CC models
 
