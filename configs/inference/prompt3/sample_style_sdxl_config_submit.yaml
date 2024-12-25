@@ -3,7 +3,7 @@ inputs:
   base_prompt: "A `cat wearing wearable `glasses in a `watercolor style."
   negative_prompt: ""
   custom_prompts:
-    - "A <gray_cat_1> `<gray_cat_2> wearing wearable glasses in a `watercolor style."
+    - "A <cat2_1> <cat2_2> wearing wearable glasses in a watercolor style."
     - "A `cat wearing <wearable_glasses_1> `<wearable_glasses_2> in a `watercolor style."
     - "A `cat wearing wearable `glasses in a <watercolor_1> `<watercolor_2> style."
   ref_image_path: "./mask/prompt_3/mask13/ref_image_13.png"
@@ -16,9 +16,9 @@ inputs:
   init_image_path: ~
   init_mask_path: ~       
   edlora_paths:
-    - "experiments/XL_lora/gray_cat.pth"    
-    - "experiments/XL_lora/wearable_glasses.pth"  
-    - "experiments/XL_lora/watercolor.pth"  
+    - "experiments/SDXL/SDXL_cat2/models/edlora_model-latest.pth"    
+    - "experiments/SDXL/SDXL_wearable_glasses/models/edlora_model-latest.pth"  
+    - "experiments/SDXL/SDXL_watercolor/models/edlora_model-latest.pth"  
   load_edlora: True
   lora_alpha: 0.7
   include_style: True
@@ -71,7 +71,7 @@ attention_operations:
   rect_mask: False
 
   use_loss_mask: True
-  visualization: True
+  visualization: False
 
 
 
