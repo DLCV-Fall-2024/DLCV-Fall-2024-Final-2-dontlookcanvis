@@ -37,5 +37,5 @@ prompt2_folder="./configs/inference/prompt3"
 
 for config_file in "$prompt2_folder"/*; do
   echo "$config_file" 
-  python sample.py --config_file "$config_file" --outimg_dir "$outimg_dir" --prompt_num "2"
+  python sample_sdxl.py --config_file "$config_file" --outimg_dir "$outimg_dir" --prompt_num "3"
 done
