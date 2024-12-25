@@ -1,39 +1,34 @@
 inputs:
   ref_prompt: "A rectangle layout."
-  base_prompt: "A `cat wearing `wearable glasses in a watercolor style."
-  negative_prompt: "lowres, bad anatomy, text, error, cropped, worst quality, low quality, normal quality, jpeg artifacts, blurry"
+  base_prompt: "A `flower in a `vase."
+  negative_prompt: ""
   custom_prompts:
-    - "A <gray_cat_1> `<gray_cat_2> wearing wearable glasses in a watercolor style"
-    # - "A <cat2_1> `<cat2_2> wearing <cat2_1> `<cat2_2> in a watercolor style."
-    - "A cat wearing <wearable_glasses_1> `<wearable_glasses_2> in a watercolor style."
-    - "A cat wearing wearable glasses in a <watercolor_1> `<watercolor_2> style."
-  ref_image_path: "examples/style/ref_image_1.png"
+    - "A <flower_1_1> `<flower_1_2> in a vase."
+    - "flower in a `<vase_1> `<vase_2>."
+  ref_image_path: "./mask/prompt_1/mask1/layout_mask.png"
   ref_mask_paths:
-    - "examples/style/ref_image_1_cat.png"
-    - "examples/style/ref_image_1_glasses.png"
-    - "examples/all_white.png"
+    - "./mask/prompt_1/mask1/flower_mask.png"
+    - "./mask/prompt_1/mask1/vase_mask.png"
   init_mask_from_points: False
   mask_center_points:
-    # - [350, 200]
-    # - [150, 300]
+    - [350, 200]
+    - [150, 300]
   init_image_path: ~
   init_mask_path: ~
   edlora_paths:
-    # - "experiments/cat2/models/edlora_model-latest.pth"
-    - "experiments/ED-LoRAs/real/gray_cat.pth"
-    - "experiments/wearable_glasses/models/edlora_model-latest.pth"
-    - "experiments/watercolor/models/edlora_model-latest.pth"
+    - "experiments/chilloutmix/flower_1/models/edlora_model-latest.pth"
+    - "experiments/chilloutmix/vase/models/edlora_model-latest.pth"
   load_edlora: True
-  lora_alpha: 0.5
+  lora_alpha: 0.8
 
 outputs:
-  outroot: "outputs/4_map"
+  outroot: "outputs/2_3"
   image_outdir: "inference_results"
   latents_outdir: "inverted_latents"
   self_attn_outdir: "self_attn"
   cross_attn_outdir: "cross_attn"
   feature_mask_outdir: "feature_mask"
-#
+
 
 base_model:
   sd_ckpt: "experiments/pretrained_models/chilloutmix"
@@ -44,19 +39,19 @@ sd_t2i:
   width: 512
   guidance_scale: 7.5
   num_inference_steps: 200
-  start_seed: 37
-  batch_size: 6
+  start_seed: 4866
+  batch_size: 1
   n_batches: 1
   verbose: False
 
 attention_operations:
   attn_guidance_end: 60
   attn_guidance_interval: 1
-  attn_guidance_weight: 3.0
+  attn_guidance_weight: 7
   custom_attn_guidance_factor: 1.5
 
   processor_filter_guidance: '.*up_blocks\.1\.attentions\.0.*attn1.*'
-  params_guidance: ["query", "key"]
+  params_guidance: ["key"]
   processor_filter_mask: '.*up_blocks\.2\.attentions\.2.*attn1.*'
   params_mask: ['attention_probs']
   processor_filter_merge: '.*up_blocks.*'
@@ -69,7 +64,7 @@ attention_operations:
   mask_refinement_start: 50
   mask_refinement_end: 80
   mask_update_interval: 5
-  mask_overlap_threshold: 0.99
+  mask_overlap_threshold: 0.5
   num_kmeans_init: 200
   rect_mask: True
 

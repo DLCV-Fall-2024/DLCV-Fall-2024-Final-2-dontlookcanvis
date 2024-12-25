@@ -1,24 +1,28 @@
 inputs:
-  ref_prompt: "A `cat on the right and a `dog on the left." #"The rectangular layout."
-  base_prompt: "A `cat on the right and a `dog on the left."
+  ref_prompt: "A rectangle layout."
+  base_prompt: "A `flower in a `vase."
   negative_prompt: ""
   custom_prompts:
-    - "A <cat2_1> `<cat2_2> on the right and a <cat2_1> `<cat2_2> on the left."
-    - "A <dog6_1> `<dog6_2> on the right and a <dog6_1> `<dog6_2> on the left."
-  ref_image_path: "./mask/prompt_0/ref_image_3.png"
+    - "A <flower_1_1> `<flower_1_2> in a vase."
+    - "flower in a `<vase_1> `<vase_2>."
+  ref_image_path: "./mask/prompt_1/mask1/layout_mask.png"
   ref_mask_paths:
-    - "./mask/prompt_0/ref_image_3_cat.png"
-    - "./mask/prompt_0/ref_image_3_dog.png"
+    - "./mask/prompt_1/mask1/flower_mask.png"
+    - "./mask/prompt_1/mask1/vase_mask.png"
   init_mask_from_points: False
+  mask_center_points:
+    - [350, 200]
+    - [150, 300]
   init_image_path: ~
   init_mask_path: ~
   edlora_paths:
-    - "experiments/stable-diffusion-v1-5/cat2/models/edlora_model-latest.pth"
-    - "experiments/stable-diffusion-v1-5/dog6/models/edlora_model-latest.pth"
+    - "experiments/chilloutmix/flower_1/models/edlora_model-latest.pth"
+    - "experiments/chilloutmix/vase/models/edlora_model-latest.pth"
   load_edlora: True
-  lora_alpha: 0.7
+  lora_alpha: 0.8
 
 outputs:
+  outroot: "outputs/2_3"
   image_outdir: "inference_results"
   latents_outdir: "inverted_latents"
   self_attn_outdir: "self_attn"
@@ -27,14 +31,15 @@ outputs:
 
 
 base_model:
-  sd_ckpt: "experiments/pretrained_models/stable-diffusion-v1-5"
+  sd_ckpt: "experiments/pretrained_models/chilloutmix"
   variant: ""
 
+sd_t2i:
   height: 512
   width: 512
   guidance_scale: 7.5
   num_inference_steps: 200
-  start_seed: 6
+  start_seed: 4875
   batch_size: 1
   n_batches: 1
   verbose: False
@@ -42,8 +47,8 @@ base_model:
 attention_operations:
   attn_guidance_end: 60
   attn_guidance_interval: 1
-  attn_guidance_weight: 10
-  custom_attn_guidance_factor: 1.0
+  attn_guidance_weight: 7
+  custom_attn_guidance_factor: 1.5
 
   processor_filter_guidance: '.*up_blocks\.1\.attentions\.0.*attn1.*'
   params_guidance: ["key"]
@@ -59,11 +64,12 @@ attention_operations:
   mask_refinement_start: 50
   mask_refinement_end: 80
   mask_update_interval: 5
-  mask_overlap_threshold: 0
-  num_kmeans_init: 100
-  rect_mask: False
+  mask_overlap_threshold: 0.5
+  num_kmeans_init: 200
+  rect_mask: True
 
   use_loss_mask: True
   visualization: False
+
 
 
