@@ -20,6 +20,10 @@ $ git-lfs clone https://huggingface.co/windwhinny/chilloutmix.git
 $ git clone https://huggingface.co/sd-legacy/stable-diffusion-v1-5
 $ git-lfs clone https://huggingface.co/SG161222/RealVisXL_V5.0.git
 ```
+After downloading the RealVisXL V5.0 model, please convert the safetensors to binary files as:
+```shell
+$ python safetensor2bin.py
+```
 
 **Install environment**
 In the repository folder,
