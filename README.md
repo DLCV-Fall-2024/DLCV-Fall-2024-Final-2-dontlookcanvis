@@ -7,8 +7,7 @@ You can also use ED-LoRA directly from this repository; only merged LoRAs need d
 ## Clone this repo
 
     git clone https://github.com/DLCV-Fall-2024/DLCV-Fall-2024-Final-2-dontlookcanvis.git
-    cd Concept-Conductor
-    pip install -r requirements.txt
+
 
 ## Preparation
 **Download Pretrained Model**
@@ -19,11 +18,21 @@ Execute in `./experiments/pretrained_models`
 ```shell
 $ git-lfs clone https://huggingface.co/windwhinny/chilloutmix.git
 $ git clone https://huggingface.co/sd-legacy/stable-diffusion-v1-5
+```shell
+** Install environment**
+In the repository folder,
+```shell
+$ pip install -r requirements.txt
 ```
 
 ## General Training
-```shell script=
-bash train.sh <path/to/config>
+First generate needed files using
+```
+$ python scripts/data_format --input_images
+```
+
+```shell
+$ bash train.sh <path/to/config>
 ```
 ## Inference
 You can choose whether to pass `$1` as the path to the output image folder. If it is not provided, the `./test_output directory`, located at the same level as the bash script, will automatically be used to store the output images.
