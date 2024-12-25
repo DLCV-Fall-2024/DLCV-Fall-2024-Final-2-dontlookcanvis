@@ -11,7 +11,7 @@ inputs:
     - "./mask/prompt_0/ref_image_8_dog.png"
   init_mask_from_points: False
   init_image_path: ~
-  init_mask_path: ~       
+  init_mask_path: ~
   edlora_paths:
     - "experiments/stable-diffusion-v1-5/cat2/models/edlora_model-latest.pth"
     - "experiments/stable-diffusion-v1-5/dog6/models/edlora_model-latest.pth"
@@ -52,9 +52,9 @@ attention_operations:
   processor_filter_merge: '.*up_blocks.*'
   params_merge: ["feature_output"]
   processor_filter_view_sa: '.*up_blocks\.2\.attentions\.2.*attn1.*'
-  params_view_sa: ["attention_probs"]      
+  params_view_sa: ["attention_probs"]
   processor_filter_view_ca: '.*up_blocks\.2\.attentions\.1.*attn2.*'
-  params_view_ca: ["attention_probs"]    
+  params_view_ca: ["attention_probs"]
 
   mask_refinement_start: 50
   mask_refinement_end: 80
