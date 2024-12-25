@@ -1,3 +1,6 @@
 [submodule "Mix-of-Show"]
 	path = Mix-of-Show
 	url = https://github.com/TencentARC/Mix-of-Show.git
+[submodule "StyleID"]
+	path = StyleID
+	url = https://github.com/chenlinchuang/StyleID
