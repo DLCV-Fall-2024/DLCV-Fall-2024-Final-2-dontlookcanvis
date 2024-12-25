@@ -1,0 +1,74 @@
+inputs:
+  ref_prompt: "The layout of a flower in a vase shaped mask."
+  base_prompt: "A flower in a vase."
+  negative_prompt: ""
+  custom_prompts:
+    - "A <flower_1_1> `<flower_1_2> in a vase."
+    - "A flower in a <vase_1> `<vase_2>"
+  # Need to be changed to new layout mask
+  ref_image_path: "./mask/prompt_1/mask4/layout_mask.png"
+  ref_mask_paths:
+    - "./mask/prompt_1/mask4/flower_mask.png"
+    - "./mask/prompt_1/mask4/vase_mask.png"
+  init_mask_from_points: False
+  mask_center_points: 
+    - [350, 200]
+    - [150, 300]
+  init_image_path: ~
+  init_mask_path: ~       
+  edlora_paths:
+    - "experiments/stable-diffusion-v1-5/flower_1/models/edlora_model-latest.pth"
+    - "experiments/stable-diffusion-v1-5/vase/models/edlora_model-latest.pth"
+  load_edlora: True
+  lora_alpha: 0.4
+
+# Need to be changed to new output directory
+outputs:
+  outroot: "outputs/prompt1_13"
+  image_outdir: "inference_results"
+  latents_outdir: "inverted_latents"
+  self_attn_outdir: "self_attn"
+  cross_attn_outdir: "cross_attn"
+  feature_mask_outdir: "feature_mask"
+
+
+base_model:
+  sd_ckpt: "experiments/pretrained_models/chilloutmix"
+  variant: ""
+
+sd_t2i:
+  height: 512
+  width: 512
+  guidance_scale: 7.5
+  num_inference_steps: 200
+  start_seed: 15
+  batch_size: 1
+  n_batches: 1
+  verbose: False
+
+attention_operations:
+  attn_guidance_end: 60 # 變長
+  attn_guidance_interval: 1
+  attn_guidance_weight: 7.0
+  custom_attn_guidance_factor: 1.2
+
+  processor_filter_guidance: '.*up_blocks\.1\.attentions\.0.*attn1.*'
+  params_guidance: ["query", "key"]
+  processor_filter_mask: '.*up_blocks\.2\.attentions\.2.*attn1.*'
+  params_mask: ['attention_probs']
+  processor_filter_merge: '.*up_blocks.*'
+  params_merge: ["feature_output"]
+  processor_filter_view_sa: '.*up_blocks\.2\.attentions\.2.*attn1.*'
+  params_view_sa: ["attention_probs"]      
+  processor_filter_view_ca: '.*up_blocks\.2\.attentions\.1.*attn2.*'
+  params_view_ca: ["attention_probs"]    
+
+  mask_refinement_start: 50
+  mask_refinement_end: 80 # 變短
+  mask_update_interval: 5
+  mask_overlap_threshold: 0.99
+  num_kmeans_init: 200 # 改
+  rect_mask: True # 長方形
+
+  use_loss_mask: True
+  visualization: False

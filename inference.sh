@@ -1,6 +1,7 @@
-# Prompt 2 directory
+# Usage
+# bash inference.sh "<Path to output image folder>"
+# $1 : "<Path to output image folder>"
 
-# $1 : <Path to output image folder>
 # Folder contains prompt 1's config files
 prompt1_folder="./configs/inference/prompt1"
 
