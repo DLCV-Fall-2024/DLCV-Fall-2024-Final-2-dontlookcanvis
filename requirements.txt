@@ -11,3 +11,4 @@ torchvision==0.17.2+cu118
 tqdm==4.65.2
 xformers==0.0.25.post1+cu118
 huggingface_hub==0.25.2
+transformers
