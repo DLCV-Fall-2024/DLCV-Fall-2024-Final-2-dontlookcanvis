@@ -53,7 +53,7 @@ def convert(args):
 		out_json_path = os.path.join(args.out_jsons_path, token_name+".json")
 		json.dump(output_json_file, open(out_json_path, "w"))
 
-		for prefix, template_fn in [("", args.template_yaml)]#, ("test_",args.test_template_yaml)]:
+		for prefix, template_fn in [("", args.template_yaml)]:
 			template_yaml_file = open(template_fn, "r")
 			token_yaml_file = open(prefix+token_name+".yml", "w")
 
