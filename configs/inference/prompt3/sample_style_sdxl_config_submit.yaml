@@ -6,11 +6,11 @@ inputs:
     - "A <gray_cat_1> `<gray_cat_2> wearing wearable glasses in a `watercolor style."
     - "A `cat wearing <wearable_glasses_1> `<wearable_glasses_2> in a `watercolor style."
     - "A `cat wearing wearable `glasses in a <watercolor_1> `<watercolor_2> style."
-  ref_image_path: "./mask/prompt_3/ref_image_13.png"
+  ref_image_path: "./mask/prompt_3/mask13/ref_image_13.png"
   ref_mask_paths:
-    - "./mask/prompt_3/ref_image_13_cat.png"
-    - "./mask/prompt_3/ref_image_13_glasses.png"  
-    - "./mask/prompt_3/ref_image_13_style.png"
+    - "./mask/prompt_3/mask13/ref_image_13_cat.png"
+    - "./mask/prompt_3/mask13/ref_image_13_glasses.png"  
+    - "./mask/prompt_3/mask13/ref_image_13_style.png"
   init_mask_from_points: False
   mask_center_points: []
   init_image_path: ~
