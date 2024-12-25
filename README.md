@@ -1,10 +1,10 @@
 # DLCV Final Project ( Multiple Concept Personalization )
 
-# Checkpoints download
+## Checkpoints download
 Please download all the checkpoints from: https://drive.google.com/drive/folders/1u2un5sqWEY7yj-U-1wgyN41BICqQ3wWm?usp=sharing
 You can also use ED-LoRA directly from this repository; only merged LoRAs need downloads.
 
-# Usage
+## Clone this repo
 
     git clone https://github.com/DLCV-Fall-2024/DLCV-Fall-2024-Final-2-dontlookcanvis.git
     cd Concept-Conductor
@@ -19,7 +19,6 @@ bash inference.sh <path/to/config>
 
 ## Reproduce experimental results
 ### Peer review
-0. 
 
     cd Concept-Conductor
     bash ../scripts/inf0_2.sh
