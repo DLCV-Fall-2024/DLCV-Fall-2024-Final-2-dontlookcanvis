@@ -6,10 +6,10 @@ inputs:
     - "A <cat2_1> `<cat2_2> on the right and a <cat2_1> `<cat2_2> on the left."
     - "A <dog6_1> `<dog6_2> on the right and a <dog6_1> `<dog6_2> on the left."
   # Need to be changed to new layout mask
-  ref_image_path: "./mask/prompt0/mask4/layout_mask.png" 
+  ref_image_path: "./mask/prompt_0/mask4/layout_mask.png"
   ref_mask_paths:
-    - "./mask/prompt0/mask4/cat_mask.png"
-    - "./mask/prompt0/mask4/dog_mask.png"
+    - "./mask/prompt_0/mask4/cat_mask.png"
+    - "./mask/prompt_0/mask4/dog_mask.png"
   init_mask_from_points: False
   mask_center_points: 
     - [350, 200]
