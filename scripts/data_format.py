@@ -18,33 +18,6 @@ semantics = {
 	"vase": "vase"
 }
 
-all_region_prompts = {
-	"0": [
-		("A <cat2_1> <cat2_2> on the right.", '[84,263,446,512]'), 
-		("A <dog6_1> <dog6_2> on the left.", '[113,15,410,245]')
-		],
-	"1": [
-		("A <flower_1_1> <flower_1_2>.", "[77,152,383,287]"), 
-		("A <vase_1> <vase_2>", "[212,152,482,331]")
-		],
-	"2": [
-		("A <dog_1> <dog_2> near a forest.", "[213,6,493,276]"), 
-		("A <pet_cat1_1> <pet_cat1_2> near a forest.", "[0,161,257,362]"),
-		("A <dog6_1> <dog6_2> near a forest.","[263,298,512,512]")
-		],
-	"3": [
-		("A <cat2_1> <cat2_2> in a <watercolor_1> <watercolor_2> style.","[107,96,512,406]"), 
-		("A <wearable_glasses_1> <wearable_glasses_2> in a <watercolor_1> <watercolor_2> style.","[169,85,230,391]")
-		]
-}
-
-sketches = {
-	"0": "cat_dog.png",
-	"1": "flower_vase.png",
-	"2": "dog_cat_dog.png",
-	"3": "cat_glasses.png"
-}
-
 new_concepts_tokens = {}
 
 def check_path(_path):
@@ -80,7 +53,7 @@ def convert(args):
 		out_json_path = os.path.join(args.out_jsons_path, token_name+".json")
 		json.dump(output_json_file, open(out_json_path, "w"))
 
-		for prefix, template_fn in [("", args.template_yaml)]:#, ("test_",args.test_template_yaml)]:
+		for prefix, template_fn in [("", args.template_yaml)]#, ("test_",args.test_template_yaml)]:
 			template_yaml_file = open(template_fn, "r")
 			token_yaml_file = open(prefix+token_name+".yml", "w")
 
@@ -123,11 +96,11 @@ if __name__=="__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--input_images_path", required=True)
 	parser.add_argument("--input_json_path", required=True)
-	parser.add_argument("--out_captions_path", required=True)
-	parser.add_argument("--out_jsons_path", required=True)
-	parser.add_argument("--template_yaml", required=True)
-	parser.add_argument("--prompts_path", required=True)
 	parser.add_argument("--pretrained_path", required=True)
+	parser.add_argument("--out_captions_path", default="captions")
+	parser.add_argument("--out_jsons_path", default="jsons")
+	parser.add_argument("--template_yaml", default="Data/template.yml")
+	parser.add_argument("--prompts_path", default="Data/val.txt")
 
 	parser.add_argument("--neg_prompt", default="")
 
