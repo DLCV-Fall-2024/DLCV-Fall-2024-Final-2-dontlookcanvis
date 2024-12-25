@@ -5,10 +5,10 @@ inputs:
   custom_prompts:
     - "A <cat2_1> `<cat2_2> on the right and a <cat2_1> `<cat2_2> on the left."
     - "A <dog6_1> `<dog6_2> on the right and a <dog6_1> `<dog6_2> on the left."
-  ref_image_path: "./mask/prompt_0/ref_image_2.png"
+  ref_image_path: "./mask/prompt_0/ref_image_5.png"
   ref_mask_paths:
-    - "./mask/prompt_0/ref_image_2_cat.png"
-    - "./mask/prompt_0/ref_image_2_dog.png"
+    - "./mask/prompt_0/ref_image_5_cat.png"
+    - "./mask/prompt_0/ref_image_5_dog.png"
   init_mask_from_points: False
   init_image_path: ~
   init_mask_path: ~       
@@ -34,7 +34,7 @@ base_model:
   width: 512
   guidance_scale: 7.5
   num_inference_steps: 200
-  start_seed: 6
+  start_seed: 3
   batch_size: 1
   n_batches: 1
   verbose: False

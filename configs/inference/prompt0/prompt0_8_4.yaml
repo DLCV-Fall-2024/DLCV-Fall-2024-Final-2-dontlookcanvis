@@ -34,8 +34,8 @@ base_model:
   width: 512
   guidance_scale: 7.5
   num_inference_steps: 200
-  start_seed: 4
-  batch_size: 1
+  start_seed: 0
+  batch_size: 16
   n_batches: 1
   verbose: False
 
