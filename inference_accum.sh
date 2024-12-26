@@ -3,7 +3,7 @@
 # $1 : "<Path to output image folder>"
 
 if [ -z "$1" ]; then
-  outimg_dir="./test_output"
+  outimg_dir="./test_output_accum"
 else
   outimg_dir="$1"
 fi
@@ -16,7 +16,7 @@ for config_file in "$prompt1_folder"/*; do
   python sample.py --config_file "$config_file" --outimg_dir "$outimg_dir" --prompt_num "0_accum" --accum True
 done
 
-# # Folder contains prompt 1's config files
+# Folder contains prompt 1's config files
 prompt1_folder="./configs/inference/prompt1"
 
 for config_file in "$prompt1_folder"/*; do

@@ -10,11 +10,14 @@ experiments/pretrained_models/RealVisXL_V5.0*
 experiments/SDXL/SDXL_cat2*
 experiments/SDXL/SDXL_watercolor*
 experiments/SDXL/SDXL_wearable_glasses*
+experiments/SDXL/SDXL_watercolor*
 test_output*
 test_prompt0*
 test_prompt1*
 test_prompt2*
 test_prompt3*
+configs/inference/prompt3_style_sdxl*
+configs/inference/sample_style_sdxl_config_submit_new*
 outputs*
 **_pycache__**
 diff*
