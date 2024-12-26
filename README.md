@@ -80,6 +80,14 @@ $ bash inference_peer.sh
 ```
 Default outputs are under ```test_output_peer``` folder.
 
+
+**Prompt3 settings**
+|                       | Bash script          | prompt3 configs folder | Model       | LoRA alpha    |   |
+|-----------------------|----------------------|------------------------|-------------|---------------|---|
+| Ablation  experiments | exp2.sh exp3.sh      | prompt3_exp            | SDXL        | All 0.7       |   |
+| Peer review           | inference_peer.sh    | prompt3_pre-inject     | chilloutmix | All 0.5       |   |
+| CodaLab               | inference_codalab.sh | prompt3                | SDXL        | 0.7, 0.7, 0.5 |   |
+
 ## Poster results
 
 ### Ablation study
