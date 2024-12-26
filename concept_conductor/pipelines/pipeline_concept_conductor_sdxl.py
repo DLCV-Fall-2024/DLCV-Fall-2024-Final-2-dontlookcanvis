@@ -856,7 +856,7 @@ class SDXLConceptConductorPipeline(StableDiffusionXLPipeline):
                             unet_lora_state_dict = state_dict['unet']
                             pretrained_unet_state_dict = custom_unet.state_dict()
                             updated_unet_state_dict = merge_lora_into_weight(pretrained_unet_state_dict, unet_lora_state_dict, model_type='unet', 
-                                                                         alpha=lora_alpha if isinstance(lora_alpha, int) else lora_alpha[rid])
+                                                                         alpha=lora_alpha if isinstance(lora_alpha, list) else lora_alpha[rid])
                             custom_unet.load_state_dict(updated_unet_state_dict)  
                             
                             del state_dict
