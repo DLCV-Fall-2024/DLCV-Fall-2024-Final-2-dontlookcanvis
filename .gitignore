@@ -11,6 +11,10 @@ experiments/SDXL/SDXL_cat2*
 experiments/SDXL/SDXL_watercolor*
 experiments/SDXL/SDXL_wearable_glasses*
 experiments/SDXL/SDXL_watercolor*
+experiments/SDXL/SDXL_dog*
+experiments/SDXL/SDXL_flower*
+experiments/SDXL/SDXL_pet_cat1*
+SDXL.zip
 test_output*
 test_prompt0*
 test_prompt1*
