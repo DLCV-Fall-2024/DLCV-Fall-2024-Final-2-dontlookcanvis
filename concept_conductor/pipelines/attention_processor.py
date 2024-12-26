@@ -385,8 +385,6 @@ class AttentionController(object):
         batch_masks = []
 
         for seed in range(attn.shape[0]):
-            # 驗證
-            print("seed", seed)
             seed_attn = attn[seed].unsqueeze(dim=0)
             seed_masks = []
             for num_clusters in num_clusters_list:
