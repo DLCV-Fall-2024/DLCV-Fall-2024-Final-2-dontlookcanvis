@@ -29,7 +29,7 @@ for config_file in "$prompt2_folder"/*; do
 done
 
 # Folder contains prompt 3's config files
-prompt3_folder="./configs/inference/prompt3"
+prompt3_folder="./configs/inference/prompt3_exp"
 
 for config_file in "$prompt3_folder"/*; do
   echo3 "$config_file" >> inference_accum_config_check
