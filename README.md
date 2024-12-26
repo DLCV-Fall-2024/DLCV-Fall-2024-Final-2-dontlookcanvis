@@ -33,7 +33,7 @@ You can download all the checkpoints except for SDXL from: https://drive.google.
 You can also use ED-LoRA directly from this repository; only merged LoRAs need downloads.
 For downloading SDXL checkpoints, use
 ```shell
-bash download.sh
+$ bash download.sh
 ```
 
 ## Training
@@ -98,16 +98,17 @@ $ bash exp3.sh
 ```
 
 Exp4: 2(+)3(+)4(+):
-Prompt 0, 1, 2: use results from Exp3. (no style needed)
-Prompt 3: Style injection on results from Exp3.
+- Prompt 0, 1, 2: use results from Exp3. (no style needed)
+- Prompt 3: Style injection on results from Exp3.
 ```shell
 $ #TODO: style injection scripts
 ```
 
-### Attention Clustering Post-processing
+### Attention Clustering Post-processing example
 ```shell
 $ bash scripts/attn_clustering.sh
 ```
+The images are provided under ```source``` folder.
 
 ### Mix of Show
 For reproduction of mix-of-show results, please clone this repository with ```--recursive``` to download the Mix-of-Show submodule.
