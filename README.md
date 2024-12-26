@@ -9,14 +9,14 @@ $ git clone https://github.com/DLCV-Fall-2024/DLCV-Fall-2024-Final-2-dontlookcan
 
 ## Preparation
 
-**Install environment**
+###Install environment
 
 In the repository folder,
 ```shell
 $ pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu118
 ```
 
-**Download Pretrained Model**
+###Download Pretrained Model
 ```shell
 $ cd experiments/pretrained_models
 ```
@@ -31,7 +31,7 @@ After downloading the RealVisXL V5.0 model, please convert the safetensors to bi
 $ python3 safetensor2bin.py
 ```
 
-**Download Checkpoints**
+###Download Checkpoints
 You can download all the checkpoints except for SDXL from: https://drive.google.com/drive/folders/1u2un5sqWEY7yj-U-1wgyN41BICqQ3wWm?usp=sharing.
 
 You can also use ED-LoRA directly from this repository; only merged LoRAs need downloads.
