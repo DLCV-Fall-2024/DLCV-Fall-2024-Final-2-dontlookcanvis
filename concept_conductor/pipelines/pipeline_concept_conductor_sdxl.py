@@ -397,7 +397,7 @@ class SDXLConceptConductorPipeline(StableDiffusionXLPipeline):
 
                 text_encoder_lora_state_dict = state_dict['text_encoder']
                 pretrained_text_encoder_state_dict = self.text_encoder.state_dict()
-                updated_text_encoder_state_dict = merge_lora_into_weight(pretrained_unet_state_dict, unet_lora_state_dict, model_type='unet', \
+                updated_text_encoder_state_dict = merge_lora_into_weight(pretrained_text_encoder_state_dict, text_encoder_lora_state_dict, model_type='text_encoder', \
                                                                          alpha=float(lora_alpha[rid]) if isinstance(lora_alpha, (list, ListConfig)) else lora_alpha)
                 self.text_encoder.load_state_dict(updated_text_encoder_state_dict)
                 del text_encoder_lora_state_dict
@@ -406,7 +406,7 @@ class SDXLConceptConductorPipeline(StableDiffusionXLPipeline):
 
                 text_encoder_2_lora_state_dict = state_dict['text_encoder_2']
                 pretrained_text_encoder_2_state_dict = self.text_encoder_2.state_dict()
-                updated_text_encoder_2_state_dict = merge_lora_into_weight(pretrained_unet_state_dict, unet_lora_state_dict, model_type='unet', \
+                updated_text_encoder_2_state_dict = merge_lora_into_weight(pretrained_text_encoder_2_state_dict, text_encoder_2_lora_state_dict, model_type='text_encoder_2', \
                                                                          alpha=float(lora_alpha[rid]) if isinstance(lora_alpha, (list, ListConfig)) else lora_alpha)
                 self.text_encoder_2.load_state_dict(updated_text_encoder_2_state_dict)
                 del text_encoder_2_lora_state_dict
@@ -856,7 +856,7 @@ class SDXLConceptConductorPipeline(StableDiffusionXLPipeline):
                             state_dict = edloras[rid]
                             unet_lora_state_dict = state_dict['unet']
                             pretrained_unet_state_dict = custom_unet.state_dict()
-                            updated_unet_state_dict = merge_lora_into_weight(pretrained_unet_state_dict, unet_lora_state_dict, model_type='unet', \
+                            updated_unet_state_dict = merge_lora_into_weight(pretrained_unet_state_dict, unet_lora_state_dict, model_type='unet',
                                                                          alpha=float(lora_alpha[rid]) if isinstance(lora_alpha, (list, ListConfig)) else lora_alpha)
                             custom_unet.load_state_dict(updated_unet_state_dict)
 
