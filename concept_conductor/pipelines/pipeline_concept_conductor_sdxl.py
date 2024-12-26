@@ -17,6 +17,7 @@
 
 
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from omegaconf import ListConfig
 
 import torch
 import numpy as np
@@ -743,7 +744,7 @@ class SDXLConceptConductorPipeline(StableDiffusionXLPipeline):
                             unet_lora_state_dict = state_dict['unet']
                             pretrained_unet_state_dict = custom_unet.state_dict()
                             updated_unet_state_dict = merge_lora_into_weight(pretrained_unet_state_dict, unet_lora_state_dict, model_type='unet', \
-                                                                         alpha=float(lora_alpha[rid]) if isinstance(lora_alpha, list) else lora_alpha[rid])
+                                                                         alpha=float(lora_alpha[rid]) if isinstance(lora_alpha, (list, ListConfig)) else lora_alpha)
                             custom_unet.load_state_dict(updated_unet_state_dict)
 
                             del unet_lora_state_dict
