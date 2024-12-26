@@ -22,3 +22,5 @@ outputs*
 **_pycache__**
 diff*
 inference_config_check
+finaltest
+style_mix_output

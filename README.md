@@ -53,7 +53,7 @@ $ bash train.sh <path/to/config>
 ```
 
 ## Inference
-You can choose whether to pass `$1` as the path to the output image folder. If it is not provided, the `./test_output directory`, located at the same level as the bash script, will automatically be used to store the output images.
+You can choose whether to pass `$1` as the path to the output image folder. If it is not provided, the `./test_output` directory, located at the same level as the bash script, will automatically be used to store the output images.
 ```shell
 $ bash inference.sh $1
 ```
@@ -159,3 +159,11 @@ $ python3 Mix-of-Show/inference/mix_of_show_sample.py \
         --suffix="" \
         --n_samples=<n_sample_you_want>
 ```
+### Style Mix
+You can choose whether to pass `$1` as the path to the output image folder. If it is not provided, the `./style_mix_output` directory, located at the same level as the bash script, will automatically be used to store the output images.
+```bash
+$ bash inference_style_vango.sh
+```
+`./style_mix_output/independent` directory will be created to save the output of the setting that `<watercolor>` and `<Vango>` weight is trained independently.
+
+`./style_mix_output/mix` directory will be created to save the output of the setting that `<watercolor>` and `<Vango>` weight is shared.
