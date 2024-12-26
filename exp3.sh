@@ -2,11 +2,7 @@
 # bash inference.sh "<Path to output image folder>"
 # $1 : "<Path to output image folder>"
 
-if [ -z "$1" ]; then
-  outimg_dir="./test_output_accum"
-else
-  outimg_dir="$1"
-fi
+outimg_dir="./test_output_accum"
 
 # Folder contains prompt 0's config files
 prompt1_folder="./configs/inference/prompt0"
@@ -39,3 +35,6 @@ for config_file in "$prompt3_folder"/*; do
   echo3 "$config_file" >> inference_accum_config_check
   python3 sample_sdxl.py --config_file "$config_file" --outimg_dir "$outimg_dir" --prompt_num "3" --accum True
 done
+
+python3 clip_evaluation/clip_score.py --input_dir Data/concept_image \
+        --json_path Data/prompts.json --output_dir test_output_accum
