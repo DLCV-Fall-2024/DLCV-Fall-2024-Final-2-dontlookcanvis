@@ -7,7 +7,7 @@ gradient_accumulation_steps: 1
 datasets:
   train:
     name: LoraDataset
-    concept_list:  ../Data/jsons/watercolor.json
+    concept_list:  Data/jsons/watercolor.json
     use_caption: true
     use_mask: true
     instance_transform:
@@ -16,7 +16,6 @@ datasets:
       - { type: Normalize, mean: [ 0.5 ], std: [ 0.5 ] }
       - { type: ShuffleCaption, keep_token_num: 1 }
       - { type: EnhanceText, enhance_type: object }
-      - { type: ResizeFillMaskNew, size: 512, crop_p: 0.5}
     replace_mapping:
       <TOK>: <watercolor_1> <watercolor_2>
     batch_size_per_gpu: 2
@@ -24,7 +23,7 @@ datasets:
 
   val_vis:
     name: PromptDataset
-    prompts: val.txt
+    prompts: Data/val.txt
     num_samples_per_prompt: 1
     latent_size: [4, 64, 64] #[ 4,64,64 ]
     replace_mapping:

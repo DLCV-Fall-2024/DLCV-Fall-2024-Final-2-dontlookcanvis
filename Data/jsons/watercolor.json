@@ -1,1 +1,1 @@
-[{"instance_prompt": "<TOK>", "instance_data_dir": "../Data/concept_image/watercolor", "caption_dir": "../Data/captions/watercolor"}]
+[{"instance_prompt": "<TOK>", "instance_data_dir": "Data/concept_image/watercolor", "caption_dir": "Data/captions/watercolor"}]

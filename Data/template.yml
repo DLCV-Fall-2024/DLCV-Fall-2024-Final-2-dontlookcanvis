@@ -16,7 +16,6 @@ datasets:
       - { type: Normalize, mean: [ 0.5 ], std: [ 0.5 ] }
       - { type: ShuffleCaption, keep_token_num: 1 }
       - { type: EnhanceText, enhance_type: object }
-      - { type: ResizeFillMaskNew, size: 512, crop_p: 0.5}
     replace_mapping:
       <TOK>: <replace_mapping>
     batch_size_per_gpu: 2
