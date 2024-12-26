@@ -1,4 +1,4 @@
-# DLCV Final Project ( Multiple Concept Personalization )
+# FRANC: Fusion of bRANching Concepts ( NTU DLCV Fall 2024 Final project 2: Multiple Concept Personalization )
 
 ## Clone this repo
 ```shell
@@ -6,6 +6,13 @@ $ git clone https://github.com/DLCV-Fall-2024/DLCV-Fall-2024-Final-2-dontlookcan
 ```
 
 ## Preparation
+
+**Install environment**
+
+In the repository folder,
+```shell
+$ pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu118
+```
 
 **Download Pretrained Model**
 ```shell
@@ -20,13 +27,6 @@ $ git-lfs clone https://huggingface.co/SG161222/RealVisXL_V5.0.git
 After downloading the RealVisXL V5.0 model, please convert the safetensors to binary files as:
 ```shell
 $ python3 safetensor2bin.py
-```
-
-**Install environment**
-
-In the repository folder,
-```shell
-$ pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu118
 ```
 
 **Download Checkpoints**
