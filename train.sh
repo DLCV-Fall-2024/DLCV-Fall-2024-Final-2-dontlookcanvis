@@ -1,2 +1,1 @@
-cd Concept-Conductor
-python train_edlora.py -opt $1 
+python3 train_edlora.py -opt $1 
