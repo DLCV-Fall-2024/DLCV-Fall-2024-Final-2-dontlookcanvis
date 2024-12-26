@@ -23,14 +23,17 @@ $ python3 safetensor2bin.py
 ```
 
 **Install environment**
+
 In the repository folder,
 ```shell
 $ pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu118
 ```
 
 **Download Checkpoints**
-You can download all the checkpoints except for SDXL from: https://drive.google.com/drive/folders/1u2un5sqWEY7yj-U-1wgyN41BICqQ3wWm?usp=sharing
+You can download all the checkpoints except for SDXL from: https://drive.google.com/drive/folders/1u2un5sqWEY7yj-U-1wgyN41BICqQ3wWm?usp=sharing.
+
 You can also use ED-LoRA directly from this repository; only merged LoRAs need downloads.
+
 For downloading SDXL checkpoints, use
 ```shell
 $ bash download.sh
