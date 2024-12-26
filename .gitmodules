@@ -4,3 +4,6 @@
 [submodule "StyleID"]
 	path = StyleID
 	url = https://github.com/chenlinchuang/StyleID
+[submodule "LayoutGPT"]
+	path = LayoutGPT
+	url = https://github.com/weixi-feng/LayoutGPT.git
