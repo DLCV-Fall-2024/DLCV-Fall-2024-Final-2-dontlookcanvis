@@ -96,7 +96,7 @@ class SDXLConceptConductorPipeline(StableDiffusionXLPipeline):
         init_image: PIL.Image.Image = None,
         init_mask:PIL.Image.Image = None,
         edloras: List = None,
-        lora_alpha: None, # int = 0.7, | List
+        lora_alpha, # int = 0.7, | List
         
         outroot: str = "outputs",
         latents_outdir: str = "inverted_latents",
