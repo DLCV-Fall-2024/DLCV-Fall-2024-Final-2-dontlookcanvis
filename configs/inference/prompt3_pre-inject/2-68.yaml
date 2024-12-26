@@ -14,7 +14,7 @@ inputs:
   init_image_path: ~
   init_mask_path: ~
   edlora_paths:
-    - "experiments/ED-LoRAs/real/gray_cat.pth"
+    - "experiments/ED-LoRAs/gray_cat.pth"
     - "experiments/chilloutmix/wearable_glasses/models/edlora_model-latest.pth"
   load_edlora: True
   lora_alpha: 0.5

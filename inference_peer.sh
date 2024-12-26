@@ -33,7 +33,7 @@ for config_file in "$prompt2_folder"/*; do
 done
 
 # Folder contains prompt 3's config files
-prompt3_folder= #TODO: folder to config of prompt3_submit_lora_alpha_070705; put yaml file under the folder!!!!
+prompt3_folder="./configs/inference/prompt3_pre-inject"
 
 for config_file in "$prompt3_folder"/*; do
   echo "$config_file" >> inference_config_check
