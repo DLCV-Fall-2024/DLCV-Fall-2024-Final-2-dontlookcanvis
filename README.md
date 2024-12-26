@@ -92,6 +92,24 @@ Default outputs are under ```test_output_peer``` folder.
 | Peer review           | inference_peer.sh    | prompt3_pre-inject     | chilloutmix | All 0.5       |   |
 | CodaLab               | inference_codalab.sh | prompt3                | SDXL        | 0.7, 0.7, 0.5 |   |
 
+
+### Style Injection
+```shell
+$ git submodule init
+$ git submodule update
+```
+Please refer to the submodule folder README.md or from ⁦https://github.com/jiwoogit/StyleID⁩ for  more informations of enviornment setup and Stable Diffusion Weights download.
+
+After setting up the enviornment and pretrained weights, run with:
+```shell
+$ python3 run_styleid.py --cnt <content_img_dir> --sty <style_img_dir>
+```
+
+For example, run:
+```shell
+$ python3 run_styleid.py --cnt <content_img_dir> --sty <style_img_dir>
+```
+
 ## Poster results
 
 ### Ablation study
