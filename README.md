@@ -1,6 +1,6 @@
 # FRANC: Fusion of bRANching Concepts ( NTU DLCV Fall 2024 Final project 2: Multiple Concept Personalization )
 
-For previous records of codes of this projects, visit: https://github.com/christmaskid/dlcv_final
+For previous attempts, records or some other stuff of this project, visit: https://github.com/christmaskid/dlcv_final
 
 ## Clone this repo
 ```shell
