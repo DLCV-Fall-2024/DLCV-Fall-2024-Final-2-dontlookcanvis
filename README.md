@@ -82,6 +82,8 @@ Default outputs are under ```test_output_peer``` folder.
 
 
 **Prompt3 settings**
+* All settings for prompt 0/1/2 for all bash files are the same.
+
 |                       | Bash script          | prompt3 configs folder | Model       | LoRA alpha    |   |
 |-----------------------|----------------------|------------------------|-------------|---------------|---|
 | Ablation  experiments | exp2.sh exp3.sh      | prompt3_exp            | SDXL        | All 0.7       |   |
@@ -92,7 +94,7 @@ Default outputs are under ```test_output_peer``` folder.
 
 ### Ablation study
 
-For CLIP score evaluation, we modify the HW2 grading scripts under ```clip_evaluation```. The results are not always the same but close to the score on CodaLab. To evaluate a folder containing images under subfolders ```0```,```1```,```2```,```3```, do:
+For offline CLIP score evaluation, we modify the HW2 grading scripts under ```clip_evaluation```. The results is slightly different but close enough to the score on CodaLab. To evaluate a folder containing images under subfolders ```0```,```1```,```2```,```3```, do:
 ```shell
 $ python3 clip_evaluation/clip_image_score.py --input_dir Data/concept_image \
         --json_path Data/prompts.json --output_dir <path/to/folder>
