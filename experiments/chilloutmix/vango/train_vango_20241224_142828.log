@@ -1,0 +1,193 @@
+2024-12-24 14:28:28,511 INFO: Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+
+Mixed precision type: fp16
+
+2024-12-24 14:28:28,512 INFO: 
+  name: vango
+  manual_seed: 0
+  mixed_precision: fp16
+  gradient_accumulation_steps: 1
+  datasets:[
+    train:[
+      name: LoraDataset
+      concept_list: /tmp2/r13922043/dlcv_final/Concept-Conductor/train/jsons/vango.json
+      use_caption: True
+      use_mask: True
+      instance_transform: [{'type': 'HumanResizeCropFinalV3', 'size': 512, 'crop_p': 0.5}, {'type': 'ToTensor'}, {'type': 'Normalize', 'mean': [0.5], 'std': [0.5]}, {'type': 'ShuffleCaption', 'keep_token_num': 1}, {'type': 'EnhanceText', 'enhance_type': 'style'}]
+      replace_mapping:[
+        <TOK>: <vango_1> <vango_2>
+      ]
+      batch_size_per_gpu: 2
+      dataset_enlarge_ratio: 500
+    ]
+    val_vis:[
+      name: PromptDataset
+      prompts: val.txt
+      num_samples_per_prompt: 1
+      latent_size: [4, 64, 64]
+      replace_mapping:[
+        <TOK>: <vango_1> <vango_2>
+      ]
+      batch_size_per_gpu: 4
+    ]
+  ]
+  models:[
+    pretrained_path: experiments/pretrained_models/chilloutmix/
+    enable_edlora: True
+    finetune_cfg:[
+      text_embedding:[
+        enable_tuning: True
+        lr: 0.001
+      ]
+      text_encoder:[
+        enable_tuning: True
+        lora_cfg:[
+          rank: 4
+          alpha: 1
+          where: CLIPSdpaAttention
+        ]
+        lr: 1e-05
+      ]
+      unet:[
+        enable_tuning: True
+        lora_cfg:[
+          rank: 4
+          alpha: 1
+          where: Attention
+        ]
+        lr: 0.0001
+      ]
+    ]
+    new_concept_token: <vango_1>+<vango_2>
+    noise_offset: 0.01
+    initializer_token: VanGogh+VanGogh
+    attn_reg_weight: 0.01
+    reg_full_identity: False
+    use_mask_loss: True
+    gradient_checkpoint: False
+    enable_xformers: True
+  ]
+  path:[
+    pretrain_network: None
+    experiments_root: /tmp2/r13922043/dlcv_final/Concept-Conductor/experiments/vango
+    models: /tmp2/r13922043/dlcv_final/Concept-Conductor/experiments/vango/models
+    log: /tmp2/r13922043/dlcv_final/Concept-Conductor/experiments/vango
+    visualization: /tmp2/r13922043/dlcv_final/Concept-Conductor/experiments/vango/visualization
+  ]
+  train:[
+    optim_g:[
+      type: AdamW
+      lr: 0.0
+      weight_decay: 0.01
+      betas: [0.9, 0.999]
+    ]
+    unet_kv_drop_rate: 0
+    scheduler: linear
+    emb_norm_threshold: 0.55
+  ]
+  val:[
+    val_during_save: True
+    compose_visualize: True
+    alpha_list: [0, 0.7, 1.0]
+    sample:[
+      num_inference_steps: 50
+      guidance_scale: 7.5
+    ]
+  ]
+  logger:[
+    print_freq: 10
+    save_checkpoint_freq: 10000.0
+  ]
+  is_train: True
+
+2024-12-24 14:28:33,370 INFO: <vango_1> (49408-49423) is random initialized by existing token (VanGogh): 47849
+2024-12-24 14:28:33,985 INFO: <vango_2> (49424-49439) is random initialized by existing token (VanGogh): 47849
+2024-12-24 14:28:33,989 INFO: optimizing embedding using lr: 0.001
+2024-12-24 14:28:33,998 INFO: optimizing text_encoder (48 LoRAs), using lr: 1e-05
+2024-12-24 14:28:34,024 INFO: optimizing unet (128 LoRAs), using lr: 0.0001
+2024-12-24 14:28:38,820 INFO: ***** Running training *****
+2024-12-24 14:28:38,820 INFO:   Num examples = 1500
+2024-12-24 14:28:38,820 INFO:   Instantaneous batch size per device = 2
+2024-12-24 14:28:38,820 INFO:   Total train batch size (w. parallel, distributed & accumulation) = 2
+2024-12-24 14:28:38,820 INFO:   Total optimization steps = 750.0
+2024-12-24 14:29:47,764 INFO: [vango..][Iter:      10, lr:(9.867e-04,9.867e-06,9.867e-05,)] [eta: 1:17:11] loss: 5.7259e-02 Norm_mean: 3.8382e-01 
+2024-12-24 14:30:54,975 INFO: [vango..][Iter:      20, lr:(9.733e-04,9.733e-06,9.733e-05,)] [eta: 1:18:46] loss: 2.7643e-01 Norm_mean: 4.0076e-01 
+2024-12-24 14:32:01,951 INFO: [vango..][Iter:      30, lr:(9.600e-04,9.600e-06,9.600e-05,)] [eta: 1:18:31] loss: 3.7178e-01 Norm_mean: 4.1367e-01 
+2024-12-24 14:33:10,458 INFO: [vango..][Iter:      40, lr:(9.467e-04,9.467e-06,9.467e-05,)] [eta: 1:18:17] loss: 1.0035e+00 Norm_mean: 4.2354e-01 
+2024-12-24 14:34:14,416 INFO: [vango..][Iter:      50, lr:(9.333e-04,9.333e-06,9.333e-05,)] [eta: 1:16:39] loss: 8.5451e-02 Norm_mean: 4.3289e-01 
+2024-12-24 14:35:17,058 INFO: [vango..][Iter:      60, lr:(9.200e-04,9.200e-06,9.200e-05,)] [eta: 1:14:58] loss: 8.2965e-01 Norm_mean: 4.4115e-01 
+2024-12-24 14:36:22,297 INFO: [vango..][Iter:      70, lr:(9.067e-04,9.067e-06,9.067e-05,)] [eta: 1:13:52] loss: 8.8906e-01 Norm_mean: 4.4913e-01 
+2024-12-24 14:37:22,504 INFO: [vango..][Iter:      80, lr:(8.933e-04,8.933e-06,8.933e-05,)] [eta: 1:12:05] loss: 2.5425e-01 Norm_mean: 4.5579e-01 
+2024-12-24 14:38:20,236 INFO: [vango..][Iter:      90, lr:(8.800e-04,8.800e-06,8.800e-05,)] [eta: 1:10:10] loss: 2.4316e-02 Norm_mean: 4.6166e-01 
+2024-12-24 14:39:24,974 INFO: [vango..][Iter:     100, lr:(8.667e-04,8.667e-06,8.667e-05,)] [eta: 1:09:12] loss: 3.4029e-01 Norm_mean: 4.6715e-01 
+2024-12-24 14:40:32,279 INFO: [vango..][Iter:     110, lr:(8.533e-04,8.533e-06,8.533e-05,)] [eta: 1:08:27] loss: 5.8610e-01 Norm_mean: 4.7193e-01 
+2024-12-24 14:41:40,581 INFO: [vango..][Iter:     120, lr:(8.400e-04,8.400e-06,8.400e-05,)] [eta: 1:07:43] loss: 8.8557e-01 Norm_mean: 4.7621e-01 
+2024-12-24 14:42:44,894 INFO: [vango..][Iter:     130, lr:(8.267e-04,8.267e-06,8.267e-05,)] [eta: 1:06:37] loss: 4.6614e-01 Norm_mean: 4.8000e-01 
+2024-12-24 14:43:46,848 INFO: [vango..][Iter:     140, lr:(8.133e-04,8.133e-06,8.133e-05,)] [eta: 1:05:21] loss: 1.6597e+00 Norm_mean: 4.8338e-01 
+2024-12-24 14:44:53,326 INFO: [vango..][Iter:     150, lr:(8.000e-04,8.000e-06,8.000e-05,)] [eta: 1:04:25] loss: 1.4099e-01 Norm_mean: 4.8690e-01 
+2024-12-24 14:45:53,448 INFO: [vango..][Iter:     160, lr:(7.867e-04,7.867e-06,7.867e-05,)] [eta: 1:03:05] loss: 1.1191e+00 Norm_mean: 4.9023e-01 
+2024-12-24 14:47:00,947 INFO: [vango..][Iter:     170, lr:(7.733e-04,7.733e-06,7.733e-05,)] [eta: 1:02:11] loss: 1.0270e-01 Norm_mean: 4.9303e-01 
+2024-12-24 14:48:05,334 INFO: [vango..][Iter:     180, lr:(7.600e-04,7.600e-06,7.600e-05,)] [eta: 1:01:07] loss: 5.6296e-02 Norm_mean: 4.9608e-01 
+2024-12-24 14:49:10,141 INFO: [vango..][Iter:     190, lr:(7.467e-04,7.467e-06,7.467e-05,)] [eta: 1:00:03] loss: 1.4971e-01 Norm_mean: 4.9941e-01 
+2024-12-24 14:50:12,830 INFO: [vango..][Iter:     200, lr:(7.333e-04,7.333e-06,7.333e-05,)] [eta: 0:58:54] loss: 8.9313e-01 Norm_mean: 5.0268e-01 
+2024-12-24 14:51:16,075 INFO: [vango..][Iter:     210, lr:(7.200e-04,7.200e-06,7.200e-05,)] [eta: 0:57:47] loss: 8.8934e-01 Norm_mean: 5.0591e-01 
+2024-12-24 14:52:24,704 INFO: [vango..][Iter:     220, lr:(7.067e-04,7.067e-06,7.067e-05,)] [eta: 0:56:53] loss: 1.3751e+00 Norm_mean: 5.0880e-01 
+2024-12-24 14:53:30,215 INFO: [vango..][Iter:     230, lr:(6.933e-04,6.933e-06,6.933e-05,)] [eta: 0:55:50] loss: 3.6855e-01 Norm_mean: 5.1203e-01 
+2024-12-24 14:54:38,291 INFO: [vango..][Iter:     240, lr:(6.800e-04,6.800e-06,6.800e-05,)] [eta: 0:54:53] loss: 1.3457e+00 Norm_mean: 5.1565e-01 
+2024-12-24 14:55:44,829 INFO: [vango..][Iter:     250, lr:(6.667e-04,6.667e-06,6.667e-05,)] [eta: 0:53:52] loss: 1.2823e+00 Norm_mean: 5.1880e-01 
+2024-12-24 14:56:51,211 INFO: [vango..][Iter:     260, lr:(6.533e-04,6.533e-06,6.533e-05,)] [eta: 0:52:50] loss: 4.4468e-01 Norm_mean: 5.2198e-01 
+2024-12-24 14:57:59,060 INFO: [vango..][Iter:     270, lr:(6.400e-04,6.400e-06,6.400e-05,)] [eta: 0:51:51] loss: 7.8350e-01 Norm_mean: 5.2483e-01 
+2024-12-24 14:59:00,040 INFO: [vango..][Iter:     280, lr:(6.267e-04,6.267e-06,6.267e-05,)] [eta: 0:50:39] loss: 6.4209e-01 Norm_mean: 5.2744e-01 
+2024-12-24 15:00:03,337 INFO: [vango..][Iter:     290, lr:(6.133e-04,6.133e-06,6.133e-05,)] [eta: 0:49:32] loss: 7.0460e-01 Norm_mean: 5.2953e-01 
+2024-12-24 15:01:03,402 INFO: [vango..][Iter:     300, lr:(6.000e-04,6.000e-06,6.000e-05,)] [eta: 0:48:20] loss: 4.7460e-01 Norm_mean: 5.3137e-01 
+2024-12-24 15:02:10,642 INFO: [vango..][Iter:     310, lr:(5.867e-04,5.867e-06,5.867e-05,)] [eta: 0:47:19] loss: 1.0950e-01 Norm_mean: 5.3296e-01 
+2024-12-24 15:03:17,288 INFO: [vango..][Iter:     320, lr:(5.733e-04,5.733e-06,5.733e-05,)] [eta: 0:46:17] loss: 6.0035e-01 Norm_mean: 5.3447e-01 
+2024-12-24 15:04:15,026 INFO: [vango..][Iter:     330, lr:(5.600e-04,5.600e-06,5.600e-05,)] [eta: 0:45:04] loss: 2.5770e-01 Norm_mean: 5.3608e-01 
+2024-12-24 15:05:19,190 INFO: [vango..][Iter:     340, lr:(5.467e-04,5.467e-06,5.467e-05,)] [eta: 0:43:59] loss: 1.0847e+00 Norm_mean: 5.3764e-01 
+2024-12-24 15:06:19,254 INFO: [vango..][Iter:     350, lr:(5.333e-04,5.333e-06,5.333e-05,)] [eta: 0:42:49] loss: 5.1789e-01 Norm_mean: 5.3904e-01 
+2024-12-24 15:07:22,679 INFO: [vango..][Iter:     360, lr:(5.200e-04,5.200e-06,5.200e-05,)] [eta: 0:41:44] loss: 7.4955e-01 Norm_mean: 5.4043e-01 
+2024-12-24 15:08:24,208 INFO: [vango..][Iter:     370, lr:(5.067e-04,5.067e-06,5.067e-05,)] [eta: 0:40:36] loss: 6.3045e-02 Norm_mean: 5.4181e-01 
+2024-12-24 15:09:27,423 INFO: [vango..][Iter:     380, lr:(4.933e-04,4.933e-06,4.933e-05,)] [eta: 0:39:31] loss: 2.6448e-02 Norm_mean: 5.4314e-01 
+2024-12-24 15:10:36,172 INFO: [vango..][Iter:     390, lr:(4.800e-04,4.800e-06,4.800e-05,)] [eta: 0:38:31] loss: 1.2163e+00 Norm_mean: 5.4461e-01 
+2024-12-24 15:11:41,293 INFO: [vango..][Iter:     400, lr:(4.667e-04,4.667e-06,4.667e-05,)] [eta: 0:37:27] loss: 1.7449e-01 Norm_mean: 5.4609e-01 
+2024-12-24 15:12:39,333 INFO: [vango..][Iter:     410, lr:(4.533e-04,4.533e-06,4.533e-05,)] [eta: 0:36:17] loss: 7.7701e-01 Norm_mean: 5.4743e-01 
+2024-12-24 15:13:44,512 INFO: [vango..][Iter:     420, lr:(4.400e-04,4.400e-06,4.400e-05,)] [eta: 0:35:14] loss: 5.3254e-01 Norm_mean: 5.4857e-01 
+2024-12-24 15:14:47,304 INFO: [vango..][Iter:     430, lr:(4.267e-04,4.267e-06,4.267e-05,)] [eta: 0:34:09] loss: 5.9402e-01 Norm_mean: 5.4973e-01 
+2024-12-24 15:15:50,725 INFO: [vango..][Iter:     440, lr:(4.133e-04,4.133e-06,4.133e-05,)] [eta: 0:33:04] loss: 1.9384e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:16:57,946 INFO: [vango..][Iter:     450, lr:(4.000e-04,4.000e-06,4.000e-05,)] [eta: 0:32:02] loss: 4.1569e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:17:57,368 INFO: [vango..][Iter:     460, lr:(3.867e-04,3.867e-06,3.867e-05,)] [eta: 0:30:54] loss: 2.4098e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:19:02,230 INFO: [vango..][Iter:     470, lr:(3.733e-04,3.733e-06,3.733e-05,)] [eta: 0:29:50] loss: 3.8376e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:19:57,724 INFO: [vango..][Iter:     480, lr:(3.600e-04,3.600e-06,3.600e-05,)] [eta: 0:28:41] loss: 4.9523e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:20:58,467 INFO: [vango..][Iter:     490, lr:(3.467e-04,3.467e-06,3.467e-05,)] [eta: 0:27:36] loss: 4.6577e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:22:03,220 INFO: [vango..][Iter:     500, lr:(3.333e-04,3.333e-06,3.333e-05,)] [eta: 0:26:32] loss: 9.0660e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:22:58,541 INFO: [vango..][Iter:     510, lr:(3.200e-04,3.200e-06,3.200e-05,)] [eta: 0:25:24] loss: 1.0248e+00 Norm_mean: 5.5007e-01 
+2024-12-24 15:24:05,934 INFO: [vango..][Iter:     520, lr:(3.067e-04,3.067e-06,3.067e-05,)] [eta: 0:24:22] loss: 1.8443e+00 Norm_mean: 5.5007e-01 
+2024-12-24 15:25:09,592 INFO: [vango..][Iter:     530, lr:(2.933e-04,2.933e-06,2.933e-05,)] [eta: 0:23:18] loss: 3.9793e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:26:16,289 INFO: [vango..][Iter:     540, lr:(2.800e-04,2.800e-06,2.800e-05,)] [eta: 0:22:15] loss: 9.0856e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:27:21,967 INFO: [vango..][Iter:     550, lr:(2.667e-04,2.667e-06,2.667e-05,)] [eta: 0:21:12] loss: 9.2367e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:28:24,813 INFO: [vango..][Iter:     560, lr:(2.533e-04,2.533e-06,2.533e-05,)] [eta: 0:20:08] loss: 8.2601e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:29:33,056 INFO: [vango..][Iter:     570, lr:(2.400e-04,2.400e-06,2.400e-05,)] [eta: 0:19:05] loss: 2.0686e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:30:35,205 INFO: [vango..][Iter:     580, lr:(2.267e-04,2.267e-06,2.267e-05,)] [eta: 0:18:01] loss: 4.5574e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:31:39,409 INFO: [vango..][Iter:     590, lr:(2.133e-04,2.133e-06,2.133e-05,)] [eta: 0:16:57] loss: 5.3843e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:32:43,926 INFO: [vango..][Iter:     600, lr:(2.000e-04,2.000e-06,2.000e-05,)] [eta: 0:15:53] loss: 8.8070e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:33:49,790 INFO: [vango..][Iter:     610, lr:(1.867e-04,1.867e-06,1.867e-05,)] [eta: 0:14:49] loss: 2.4879e-02 Norm_mean: 5.5007e-01 
+2024-12-24 15:34:55,055 INFO: [vango..][Iter:     620, lr:(1.733e-04,1.733e-06,1.733e-05,)] [eta: 0:13:45] loss: 8.0754e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:35:44,742 INFO: [vango..][Iter:     630, lr:(1.600e-04,1.600e-06,1.600e-05,)] [eta: 0:12:39] loss: 8.9102e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:36:50,002 INFO: [vango..][Iter:     640, lr:(1.467e-04,1.467e-06,1.467e-05,)] [eta: 0:11:35] loss: 4.8744e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:37:57,970 INFO: [vango..][Iter:     650, lr:(1.333e-04,1.333e-06,1.333e-05,)] [eta: 0:10:32] loss: 1.3013e+00 Norm_mean: 5.5007e-01 
+2024-12-24 15:39:00,547 INFO: [vango..][Iter:     660, lr:(1.200e-04,1.200e-06,1.200e-05,)] [eta: 0:09:28] loss: 3.2884e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:40:06,108 INFO: [vango..][Iter:     670, lr:(1.067e-04,1.067e-06,1.067e-05,)] [eta: 0:08:24] loss: 4.3869e-02 Norm_mean: 5.5007e-01 
+2024-12-24 15:41:06,641 INFO: [vango..][Iter:     680, lr:(9.333e-05,9.333e-07,9.333e-06,)] [eta: 0:07:20] loss: 1.2991e+00 Norm_mean: 5.5007e-01 
+2024-12-24 15:42:14,449 INFO: [vango..][Iter:     690, lr:(8.000e-05,8.000e-07,8.000e-06,)] [eta: 0:06:17] loss: 4.1970e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:43:19,139 INFO: [vango..][Iter:     700, lr:(6.667e-05,6.667e-07,6.667e-06,)] [eta: 0:05:13] loss: 2.1710e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:44:20,880 INFO: [vango..][Iter:     710, lr:(5.333e-05,5.333e-07,5.333e-06,)] [eta: 0:04:09] loss: 1.1325e+00 Norm_mean: 5.5007e-01 
+2024-12-24 15:45:27,731 INFO: [vango..][Iter:     720, lr:(4.000e-05,4.000e-07,4.000e-06,)] [eta: 0:03:05] loss: 5.0873e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:46:08,410 INFO: [vango..][Iter:     730, lr:(2.667e-05,2.667e-07,2.667e-06,)] [eta: 0:02:00] loss: 5.6474e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:46:52,531 INFO: [vango..][Iter:     740, lr:(1.333e-05,1.333e-07,1.333e-06,)] [eta: 0:00:57] loss: 2.9645e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:47:47,750 INFO: [vango..][Iter:     750, lr:(0.000e+00,0.000e+00,0.000e+00,)] [eta: -1 day, 23:59:54] loss: 1.0928e-01 Norm_mean: 5.5007e-01 
+2024-12-24 15:47:47,845 INFO: Save state to /tmp2/r13922043/dlcv_final/Concept-Conductor/experiments/vango/models/edlora_model-latest.pth
+2024-12-24 15:47:47,845 INFO: Start validation /tmp2/r13922043/dlcv_final/Concept-Conductor/experiments/vango/models/edlora_model-latest.pth:
