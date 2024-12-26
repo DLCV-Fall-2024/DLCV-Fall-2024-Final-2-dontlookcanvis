@@ -21,3 +21,4 @@ configs/inference/sample_style_sdxl_config_submit_new*
 outputs*
 **_pycache__**
 diff*
+inference_config_check
